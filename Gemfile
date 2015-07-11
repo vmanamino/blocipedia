@@ -51,3 +51,12 @@ group :development, :test do
 end
 
 gem 'figaro', '1.0'
+
+# instead of erb files, use haml
+gem 'haml'
+
+# bootstrap style
+gem 'bootstrap-sass'
+gem 'faker'
+#user authentication
+gem 'devise'
