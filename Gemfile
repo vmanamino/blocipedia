@@ -1,17 +1,22 @@
 source 'https://rubygems.org'
 
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'
-#in production use postgre for active record
+# in production use postgre for active record
 group :production do
-   gem 'pg'
-   gem 'rails_12factor'
- end
-#in dev use sqlite3 for active record
- group :development do
-   gem 'sqlite3'
- end
+  gem 'pg'
+  gem 'rails_12factor'
+end
+# in dev use sqlite3 for active record
+group :development do
+  gem 'sqlite3'
+end
+
+group :test do
+  gem 'rspec-rails', '~> 3.0'
+  gem 'capybara', '~> 2.3.0'
+end
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -48,6 +53,9 @@ group :development, :test do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+
+  # find style convention errors
+  gem 'rubocop', require: false
 end
 
 gem 'figaro', '1.0'
@@ -58,5 +66,5 @@ gem 'haml'
 # bootstrap style
 gem 'bootstrap-sass'
 gem 'faker'
-#user authentication
+# user authentication
 gem 'devise'
