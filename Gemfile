@@ -68,3 +68,6 @@ gem 'bootstrap-sass'
 gem 'faker'
 # user authentication
 gem 'devise'
+#use FactoryGirls for rspec tests
+gem 'factory_girl_rails', '~> 4.0'
+

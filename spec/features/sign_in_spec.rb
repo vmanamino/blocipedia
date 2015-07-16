@@ -5,7 +5,7 @@ describe 'Sign in flow' do
 
   describe 'successful' do
     it 'redirects to welcome index view' do
-      user = authenticated_user
+      user = create(:user)
       visit root_path
 
       within('.user-info') do
