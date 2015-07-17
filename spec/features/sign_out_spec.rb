@@ -1,13 +1,9 @@
 require 'rails_helper'
-
-describe 'Sign in flow' do
-  # include TestFactories
-
-  describe 'successful sign in' do
-    it 'redirects to welcome index view and indicates sign-in status' do
+describe 'Sign out flow' do
+  describe 'Successful sign out' do
+    it 'redicts to the welcome index view and indicates successful sign out' do
       user = create(:user)
       visit root_path
-
       within('.user-info') do
         click_link 'Sign In'
       end
@@ -19,9 +15,15 @@ describe 'Sign in flow' do
       end
 
       within('.user-info') do
-        expect(page).to have_content(user.email)
-        expect(page).to have_content('Hello')
-        find_link('Sign out').visible?
+        click_link 'Sign out'
+      end
+
+      within('.container') do
+        expect(page).to have_content('Signed out successfully')
+      end
+
+      within('.user-info') do
+        find_link('Sign In').visible?
       end
       expect(current_path).to eq root_path
     end

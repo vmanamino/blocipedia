@@ -1,78 +1,19 @@
-Inspecting 12 files
-W..C...CCCWC
+Inspecting 14 files
+C..........CCC
 
 Offenses:
 
-Gemfile:3:1: C: Extra blank line detected.
-Gemfile:6:1: C: Missing space after #.
-#in production use postgre for active record
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Gemfile:10:2: W: end at 10, 1 is not aligned with group :production do at 7, 0
- end
- ^^^
-Gemfile:11:1: C: Incorrect indentation detected (column 0 instead of 1).
-#in dev use sqlite3 for active record
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Gemfile:11:1: C: Missing space after #.
-#in dev use sqlite3 for active record
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Gemfile:12:2: C: Inconsistent indentation detected.
- group :development do
- ^^^^^^^^^^^^^^^^^^^^^
-Gemfile:18:29: C: Trailing whitespace detected.
-  gem 'capybara', '~> 2.3.0'  
-                            ^^
-Gemfile:57:1: C: Trailing whitespace detected.
-Gemfile:70:1: C: Missing space after #.
-#user authentication
-^^^^^^^^^^^^^^^^^^^^
-app/controllers/application_controller.rb:6:1: C: Trailing whitespace detected.
-app/controllers/application_controller.rb:7:4: C: Indent access modifiers like protected.
-   protected
-   ^^^^^^^^^
-app/controllers/application_controller.rb:8:1: C: Trailing whitespace detected.
-app/controllers/application_controller.rb:9:4: C: Inconsistent indentation detected.
-   def configure_permitted_parameters
-   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-app/models/user.rb:5:3: C: Align the parameters of a method call if they span more than one line.
-  :recoverable, :rememberable, :trackable, :validatable, :confirmable
-  ^^^^^^^^^^^^
-spec/support/test_factories.rb:2:33: C: Surrounding space missing in default value assignment.
-  def authenticated_user(options={})
-                                ^
-spec/support/test_factories.rb:3:20: C: Space inside { missing.
-    user_options = {email: "email#{rand}@fake.com", password: 'password'}.merge(options)
-                   ^
-spec/support/test_factories.rb:3:73: C: Space inside } missing.
-    user_options = {email: "email#{rand}@fake.com", password: 'password'}.merge(options)
-                                                                        ^
-spec/support/test_factories.rb:9:4: C: Final newline missing.
-end
-   
-spec/rails_helper.rb:5:7: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-abort("The Rails environment is running in production mode!") if Rails.env.production?
-      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-spec/features/sign_in_spec.rb:3:10: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-describe "Sign in flow" do
-         ^^^^^^^^^^^^^^
-spec/features/sign_in_spec.rb:4:1: C: Trailing whitespace detected.
-spec/features/sign_in_spec.rb:6:1: C: Trailing whitespace detected.
-spec/features/sign_in_spec.rb:7:12: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-  describe "successful" do
-           ^^^^^^^^^^^^
-spec/features/sign_in_spec.rb:8:8: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
-    it "redirects to welcome index view" do
-       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-spec/features/sign_in_spec.rb:11:1: C: Trailing whitespace detected.
-spec/features/sign_in_spec.rb:13:13: W: (...) interpreted as grouped expression.
-      within ('.user-info') do
-            ^
-spec/features/sign_in_spec.rb:18:1: C: Trailing whitespace detected.
-spec/features/sign_in_spec.rb:24:4: C: Final newline missing.
-end
-   
+Gemfile:73:1: C: 1 trailing blank lines detected.
+spec/features/sign_out_spec.rb:7:1: C: Trailing whitespace detected.
+spec/features/sign_out_spec.rb:17:1: C: Trailing whitespace detected.
+spec/features/sign_out_spec.rb:29:1: C: Trailing whitespace detected.
+spec/features/sign_out_spec.rb:31:1: C: Trailing whitespace detected.
+spec/features/sign_out_spec.rb:32:8: C: Trailing whitespace detected.
+    end      
+       ^^^^^^
+spec/features/sign_in_spec.rb:28:1: C: Extra empty line detected at block body end.
 spec/spec_helper.rb:45:1: C: Do not use block comments.
-=begin
-^^^^^^
+=begin # rubocop:disable Rails/BlockComments
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-12 files inspected, 29 offenses detected
+14 files inspected, 8 offenses detected
