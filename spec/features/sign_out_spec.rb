@@ -24,6 +24,7 @@ describe 'Sign out flow' do
 
       within('.user-info') do
         find_link('Sign In').visible?
+        expect(page).not_to have_content('Sign out')
       end
       expect(current_path).to eq root_path
     end
