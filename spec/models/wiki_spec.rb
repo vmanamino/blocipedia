@@ -5,5 +5,4 @@ describe Wiki do
     @wiki = create(:wiki)
     expect(@wiki).to be_valid
   end
-  
 end

@@ -7,7 +7,7 @@ class WikisController < ApplicationController
 
   def new
   end
-  
+
   def create
     @wiki = current_user.wikis.build(wiki_params)
     if @wiki.save
@@ -20,18 +20,29 @@ class WikisController < ApplicationController
 
   def edit
   end
-  
+
+  def update
+    @wiki = Wiki.find(params[:id])
+    if @wiki.update_attributes(wiki_params)
+      flash[:notice] = 'Your wiki was updated'
+      redirect_to @wiki
+    else
+      flash[:error] = 'Your wiki failed to update'
+      redirect_to @wiki
+    end
+  end
+
   def destroy
     @wiki = Wiki.find(params[:id])
     if @wiki.destroy
       flash[:notice] = "\"#{@wiki.title}\" was deleted successfully."
-      redirect_to root_path      
+      redirect_to root_path
     else
-      flash[:error] = "Your wiki failed to delete, try again"
+      flash[:error] = 'Your wiki failed to delete, try again'
       render :show
     end
   end
-  
+
   def wiki_params
     params.require(:wiki).permit(:title, :body, :private)
   end
