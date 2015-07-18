@@ -1,0 +1,19 @@
+Inspecting 14 files
+C..........CCC
+
+Offenses:
+
+Gemfile:73:1: C: 1 trailing blank lines detected.
+spec/features/sign_out_spec.rb:7:1: C: Trailing whitespace detected.
+spec/features/sign_out_spec.rb:17:1: C: Trailing whitespace detected.
+spec/features/sign_out_spec.rb:29:1: C: Trailing whitespace detected.
+spec/features/sign_out_spec.rb:31:1: C: Trailing whitespace detected.
+spec/features/sign_out_spec.rb:32:8: C: Trailing whitespace detected.
+    end      
+       ^^^^^^
+spec/features/sign_in_spec.rb:28:1: C: Extra empty line detected at block body end.
+spec/spec_helper.rb:45:1: C: Do not use block comments.
+=begin # rubocop:disable Rails/BlockComments
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+14 files inspected, 8 offenses detected
