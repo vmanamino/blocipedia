@@ -44,7 +44,7 @@ describe WikisController do
     it 'instantiates a new empty wiki' do
       get :new
       wiki = assigns(:wiki)
-      expect(wiki.id).to be_nil
+      expect(wiki.id).to be_nil      
     end
   end
   describe '#create' do
@@ -54,17 +54,27 @@ describe WikisController do
       expect(Wiki.count).to eq(1)
       wiki = Wiki.find_by(user_id: @user)
       expect(wiki.title).to eq('my wiki')
+      expect(wiki.user_id).to eq(@user.id)
       expect(wiki.id).to eq(1)
-      expect(response).to redirect_to wiki
     end
     it 'redirects to newly created wiki' do
       post :create, wiki: { title: 'my wiki', body: 'this is my body, how great', private: false, user_id: @user.id }
       wiki = Wiki.find_by(user_id: @user)
       expect(response).to redirect_to wiki
     end
-    it 'fails to save wiki with invalid title' do
+    it 'fails to save wiki with [invalid] title too short' do
       post :create, wiki: { title: 'my', body: 'this is my body, how great', private: false, user_id: @user.id }
       expect(flash[:error]).to eq('Your wiki failed to save')
+    end
+    it 'fails to save wiki with [invalid] title too long' do
+      post :create, wiki: { title: 'tooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooolooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooongmystriiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiing', body: 'this is my body, how great', private: false, user_id: @user.id }
+      expect(flash[:error]).to eq('Your wiki failed to save')
+      expect(Wiki.count).to eq(0)
+    end
+    it 'fails to save wiki with [invalid] body too short' do
+      post :create, wiki: { title: 'my wiki', body: 'this is my body', private: false, user_id: @user.id }
+      expect(flash[:error]).to eq('Your wiki failed to save')
+      expect(Wiki.count).to eq(0)
     end
     it 'fails to save wiki with no user' do
       post :create, wiki: { title: 'my', body: 'this is my body, how great', private: false }
