@@ -4,19 +4,21 @@ include Devise::TestHelpers
 describe WikisController do
   before do
     @user = create(:user)
-    sign_in @user       
+    sign_in @user
   end
-  
+
   describe '#index' do
     it 'collection of all wikis' do
-      10.times do create(:wiki)      
+      10.times do
+        create(:wiki)
       end
       wikis = Wiki.all
-      get :index      
-      expect(assigns(:wikis)).to match_array(wikis)            
+      get :index
+      expect(assigns(:wikis)).to match_array(wikis)
     end
     it 'orders wikis by id' do
-      10.times do create(:wiki)      
+      10.times do
+        create(:wiki)
       end
       get :index
       wikis = assigns(:wikis)
@@ -35,7 +37,7 @@ describe WikisController do
       expect(assigns(:wiki)).to eq(wiki)
     end
   end
-  
+
   describe '#new' do
     it 'renders a new template' do
       get :new
@@ -44,7 +46,7 @@ describe WikisController do
     it 'instantiates a new empty wiki' do
       get :new
       wiki = assigns(:wiki)
-      expect(wiki.id).to be_nil      
+      expect(wiki.id).to be_nil
     end
   end
   describe '#create' do
@@ -67,7 +69,7 @@ describe WikisController do
       expect(flash[:error]).to eq('Your wiki failed to save')
     end
     it 'fails to save wiki with [invalid] title too long' do
-      post :create, wiki: { title: 'tooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooolooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooongmystriiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiing', body: 'this is my body, how great', private: false, user_id: @user.id }
+      post :create, wiki: { title: 'tooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooolooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooongmystriiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiing', body: 'this is my body, how great', private: false, user_id: @user.id } # rubocop:disable Metrics/LineLength
       expect(flash[:error]).to eq('Your wiki failed to save')
       expect(Wiki.count).to eq(0)
     end
@@ -79,12 +81,12 @@ describe WikisController do
     it 'fails to save wiki with no user' do
       post :create, wiki: { title: 'my', body: 'this is my body, how great', private: false }
       expect(flash[:error]).to eq('Your wiki failed to save')
-      expect(Wiki.count).to eq(0)      
+      expect(Wiki.count).to eq(0)
     end
     it 'redirects to new template on failed save of wiki with duplicate id' do
       wiki_other = @user.wikis.build(title: 'my other wiki', body: 'this is my other, how great now', private: false)
       wiki_other.save
-      post :create, wiki: {id: wiki_other.id, title: 'my', body: 'this is my body, how great', private: false, user_id: @user.id }
+      post :create, wiki: { id: wiki_other.id, title: 'my', body: 'this is my body, how great', private: false, user_id: @user.id } # rubocop:disable Metrics/LineLength
       expect(flash[:error]).to eq('Your wiki failed to save')
       expect(response).to render_template('new')
     end
@@ -104,10 +106,10 @@ describe WikisController do
     it 'redirects to root' do
       wiki = @user.wikis.build(title: 'my wiki', body: 'this is my body, how great now', private: false)
       wiki.save
-      delete :destroy, id: wiki.id 
+      delete :destroy, id: wiki.id
       expect(flash[:notice]).to eq('Your wiki was deleted successfully.')
       expect(response).to redirect_to root_path
-    end    
+    end
   end
 
   describe '#edit' do
@@ -145,8 +147,8 @@ describe WikisController do
     it 'generates error on failed update: invalid title' do
       wiki = @user.wikis.build(title: 'my wiki', body: 'this is my body, how great', private: false)
       wiki.save
-      patch :update, id: wiki.id, wiki: { title: 'my', body: 'this is my new body, how great', private: true } # invalid title
+      patch :update, id: wiki.id, wiki: { title: 'my', body: 'this is my new body, how great', private: true }
       expect(flash[:error]).to eq('Your wiki failed to update')
-    end    
+    end
   end
 end

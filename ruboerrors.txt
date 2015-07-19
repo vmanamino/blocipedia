@@ -1,0 +1,66 @@
+Inspecting 20 files
+....C....C..C....CC.
+
+Offenses:
+
+app/controllers/wikis_controller.rb:42:24: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      flash[:notice] = "Your wiki was deleted successfully."
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app/models/wiki.rb:3:1: C: Trailing whitespace detected.
+spec/factories/user.rb:9:1: C: Trailing whitespace detected.
+spec/factories/user.rb:10:1: C: Trailing whitespace detected.
+spec/factories/user.rb:17:61: C: Final newline missing.
+#     confirmed_at Time.now # rubocop:disable Rails/TimeZone
+                                                            
+spec/controllers/wikis_controller.rb:7:18: C: Trailing whitespace detected.
+    sign_in @user       
+                 ^^^^^^^
+spec/controllers/wikis_controller.rb:9:1: C: Trailing whitespace detected.
+spec/controllers/wikis_controller.rb:12:19: C: Block body expression is on the same line as the block start.
+      10.times do create(:wiki)      
+                  ^^^^^^^^^^^^^
+spec/controllers/wikis_controller.rb:12:32: C: Trailing whitespace detected.
+      10.times do create(:wiki)      
+                               ^^^^^^
+spec/controllers/wikis_controller.rb:15:17: C: Trailing whitespace detected.
+      get :index      
+                ^^^^^^
+spec/controllers/wikis_controller.rb:16:52: C: Trailing whitespace detected.
+      expect(assigns(:wikis)).to match_array(wikis)            
+                                                   ^^^^^^^^^^^^
+spec/controllers/wikis_controller.rb:19:19: C: Block body expression is on the same line as the block start.
+      10.times do create(:wiki)      
+                  ^^^^^^^^^^^^^
+spec/controllers/wikis_controller.rb:19:32: C: Trailing whitespace detected.
+      10.times do create(:wiki)      
+                               ^^^^^^
+spec/controllers/wikis_controller.rb:38:1: C: Trailing whitespace detected.
+spec/controllers/wikis_controller.rb:47:32: C: Trailing whitespace detected.
+      expect(wiki.id).to be_nil      
+                               ^^^^^^
+spec/controllers/wikis_controller.rb:82:34: C: Trailing whitespace detected.
+      expect(Wiki.count).to eq(0)      
+                                 ^^^^^^
+spec/controllers/wikis_controller.rb:87:27: C: Space inside { missing.
+      post :create, wiki: {id: wiki_other.id, title: 'my', body: 'this is my body, how great', private: false, user_id: @user.id }
+                          ^
+spec/controllers/wikis_controller.rb:87:121: C: Line is too long. [130/120]
+      post :create, wiki: {id: wiki_other.id, title: 'my', body: 'this is my body, how great', private: false, user_id: @user.id }
+                                                                                                                        ^^^^^^^^^^
+spec/controllers/wikis_controller.rb:107:35: C: Trailing whitespace detected.
+      delete :destroy, id: wiki.id 
+                                  ^
+spec/controllers/wikis_controller.rb:110:8: C: Trailing whitespace detected.
+    end    
+       ^^^^
+spec/controllers/wikis_controller.rb:148:121: C: Line is too long. [126/120]
+      patch :update, id: wiki.id, wiki: { title: 'my', body: 'this is my new body, how great', private: true } # invalid title
+                                                                                                                        ^^^^^^
+spec/controllers/wikis_controller.rb:150:8: C: Trailing whitespace detected.
+    end    
+       ^^^^
+spec/spec_helper.rb:45:1: C: Do not use block comments.
+=begin # rubocop:disable Style/BlockComments
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+20 files inspected, 23 offenses detected
