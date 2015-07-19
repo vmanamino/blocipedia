@@ -1,11 +1,14 @@
 class WikisController < ApplicationController
   def index
+    @wikis = Wiki.all
   end
 
   def show
+    @wiki = Wiki.find(params[:id])
   end
 
   def new
+    @wiki = Wiki.new
   end
 
   def create
@@ -19,6 +22,7 @@ class WikisController < ApplicationController
   end
 
   def edit
+    @wiki = Wiki.find(params[:id])
   end
 
   def update
@@ -35,7 +39,7 @@ class WikisController < ApplicationController
   def destroy
     @wiki = Wiki.find(params[:id])
     if @wiki.destroy
-      flash[:notice] = "\"#{@wiki.title}\" was deleted successfully."
+      flash[:notice] = "Your wiki was deleted successfully."
       redirect_to root_path
     else
       flash[:error] = 'Your wiki failed to delete, try again'
