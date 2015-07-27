@@ -1,4 +1,6 @@
 class WikisController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :show]
+  
   def index
     @wikis = Wiki.all
   end
@@ -14,7 +16,8 @@ class WikisController < ApplicationController
   def create
     @wiki = current_user.wikis.build(wiki_params)
     if @wiki.save
-      redirect_to @wiki, notice: 'Your wiki was saved'
+      flash[:notice] = 'Your wiki was saved'
+      redirect_to @wiki
     else
       flash[:error] = 'Your wiki failed to save'
       render :new

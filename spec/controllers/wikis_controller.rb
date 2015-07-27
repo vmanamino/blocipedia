@@ -9,12 +9,9 @@ describe WikisController do
 
   describe '#index' do
     it 'collection of all wikis' do
-      10.times do
-        create(:wiki)
-      end
-      wikis = Wiki.all
+      wiki_list = create_list(:wiki, 10)
       get :index
-      expect(assigns(:wikis)).to match_array(wikis)
+      expect(assigns(:wikis)).to match_array(wiki_list)
     end
     it 'orders wikis by id' do
       10.times do
@@ -50,43 +47,41 @@ describe WikisController do
     end
   end
   describe '#create' do
-    it 'creates a wiki for current user' do
+    it 'a wiki for current user' do
       expect(Wiki.find_by(user_id: @user)).to be_nil
-      post :create, wiki: { title: 'my wiki', body: 'this is my body, how great', private: false, user_id: @user.id }
+      post :create, wiki: { title: 'my wiki', body: 'this is my body, how great' }      
       expect(Wiki.count).to eq(1)
       wiki = Wiki.find_by(user_id: @user)
       expect(wiki.title).to eq('my wiki')
-      expect(wiki.user_id).to eq(@user.id)
+      expect(wiki.user_id).to eq(@user.id)      
       expect(wiki.id).to eq(1)
     end
+    it "automatic value of private is false" do
+      post :create, wiki: { title: 'my wiki', body: 'this is my body, how great, not not sharing it' }      
+      wiki = Wiki.find_by(user_id: @user.id)
+      expect(wiki.private).to be_nil
+    end
     it 'redirects to newly created wiki' do
-      post :create, wiki: { title: 'my wiki', body: 'this is my body, how great', private: false, user_id: @user.id }
-      wiki = Wiki.find_by(user_id: @user)
-      expect(response).to redirect_to wiki
+      post :create, wiki: { title: 'my wiki', body: 'this is my body, how great' }
+      wiki_path = Wiki.find_by(user_id: @user)
+      expect(response).to redirect_to(wiki_path)
     end
     it 'fails to save wiki with [invalid] title too short' do
-      post :create, wiki: { title: 'my', body: 'this is my body, how great', private: false, user_id: @user.id }
+      post :create, wiki: { title: 'my', body: 'this is my body, how great' }
       expect(flash[:error]).to eq('Your wiki failed to save')
     end
     it 'fails to save wiki with [invalid] title too long' do
-      post :create, wiki: { title: 'tooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooolooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooongmystriiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiing', body: 'this is my body, how great', private: false, user_id: @user.id } # rubocop:disable Metrics/LineLength
+      post :create, wiki: { title: 'tooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooolooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooongmystriiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiing', body: 'this is my body, how great' } # rubocop:disable Metrics/LineLength
       expect(flash[:error]).to eq('Your wiki failed to save')
       expect(Wiki.count).to eq(0)
     end
     it 'fails to save wiki with [invalid] body too short' do
-      post :create, wiki: { title: 'my wiki', body: 'this is my body', private: false, user_id: @user.id }
+      post :create, wiki: { title: 'my wiki', body: 'this is my body' }
       expect(flash[:error]).to eq('Your wiki failed to save')
       expect(Wiki.count).to eq(0)
-    end
-    it 'fails to save wiki with no user' do
-      post :create, wiki: { title: 'my', body: 'this is my body, how great', private: false }
-      expect(flash[:error]).to eq('Your wiki failed to save')
-      expect(Wiki.count).to eq(0)
-    end
-    it 'redirects to new template on failed save of wiki with duplicate id' do
-      wiki_other = @user.wikis.build(title: 'my other wiki', body: 'this is my other, how great now', private: false)
-      wiki_other.save
-      post :create, wiki: { id: wiki_other.id, title: 'my', body: 'this is my body, how great', private: false, user_id: @user.id } # rubocop:disable Metrics/LineLength
+    end    
+    it 'redirects to new template on failed save of wiki title too short' do
+      post :create, wiki: { title: 'my', body: 'this is my body, how great' }      
       expect(flash[:error]).to eq('Your wiki failed to save')
       expect(response).to render_template('new')
     end
@@ -94,19 +89,17 @@ describe WikisController do
 
   describe '#destroy' do
     it 'a wiki for current user' do
-      wiki = @user.wikis.build(title: 'my wiki', body: 'this is my body, how great now', private: false)
-      wiki.save
-      expect(@user.wikis).not_to be_nil
-      expect(Wiki.count).to eq(1)
-      delete :destroy, id: wiki.id, user_id: @user.id
+      post :create, wiki: { title: 'my wiki', body: 'this is my body, how great' }
+      wiki = Wiki.find_by(user_id: @user.id)
+      delete :destroy, id: wiki
       expect(flash[:notice]).to eq('Your wiki was deleted successfully.')
       expect(Wiki.find_by(user_id: @user)).to be_nil
       expect(Wiki.count).to eq(0)
     end
     it 'redirects to root' do
-      wiki = @user.wikis.build(title: 'my wiki', body: 'this is my body, how great now', private: false)
-      wiki.save
-      delete :destroy, id: wiki.id
+      post :create, wiki: { title: 'my wiki', body: 'this is my body, how great' }
+      wiki = Wiki.find_by(user_id: @user.id)
+      delete :destroy, id: wiki
       expect(flash[:notice]).to eq('Your wiki was deleted successfully.')
       expect(response).to redirect_to root_path
     end
@@ -126,29 +119,39 @@ describe WikisController do
   end
   describe '#update' do
     it 'updates a wiki for current user' do
-      wiki = @user.wikis.build(title: 'my wiki', body: 'this is my body, how great', private: false)
-      wiki.save
+      post :create, wiki: { title: 'my wiki', body: 'this is my body, how great' }
+      wiki = Wiki.find_by(user_id: @user.id)
       expect(wiki.title).to eq('my wiki')
       patch :update, id: wiki.id, wiki: { title: 'my new wiki', body: 'this is my new body, how great', private: true }
-      wiki_new = Wiki.find_by(user_id: @user)
-      expect(wiki_new.title).not_to eq(wiki.title)
-      expect(wiki_new.title).to eq('my new wiki')
-      expect(wiki_new.body).not_to eq(wiki.body)
-      expect(wiki_new.body).to eq('this is my new body, how great')
-      expect(wiki_new.private).not_to eq(wiki.private)
-      expect(wiki_new.private).to eq(true)
+      wiki_updated = Wiki.find_by(user_id: @user)
+      expect(wiki_updated.title).not_to eq(wiki.title)
+      expect(wiki_updated.title).to eq('my new wiki')
+      expect(wiki_updated.body).not_to eq(wiki.body)
+      expect(wiki_updated.body).to eq('this is my new body, how great')
+      expect(wiki_updated.private).not_to eq(wiki.private)
+      expect(wiki_updated.private).to eq(true)
     end
     it 'redirects to updated wiki' do
-      wiki = @user.wikis.build(title: 'my wiki', body: 'this is my body, how great', private: false)
-      wiki.save
+      post :create, wiki: { title: 'my wiki', body: 'this is my body, how great' }
+      wiki = Wiki.find_by(user_id: @user.id)
       patch :update, id: wiki.id, wiki: { title: 'my new wiki', body: 'this is my new body, how great', private: true }
+      wiki_updated = Wiki.find(wiki.id)
+      expect(wiki_updated.title).to eq('my new wiki')
+      expect(response).to redirect_to wiki_updated
       expect(response).to redirect_to wiki
     end
     it 'generates error on failed update: invalid title' do
-      wiki = @user.wikis.build(title: 'my wiki', body: 'this is my body, how great', private: false)
-      wiki.save
+      post :create, wiki: { title: 'my wiki', body: 'this is my body, how great' }
+      wiki = Wiki.find_by(user_id: @user.id)
       patch :update, id: wiki.id, wiki: { title: 'my', body: 'this is my new body, how great', private: true }
-      expect(flash[:error]).to eq('Your wiki failed to update')
+      expect(flash[:error]).to eq('Your wiki failed to update')      
+    end
+    it 'redirects to wiki which failed to update' do
+      post :create, wiki: { title: 'my wiki', body: 'this is my body, how great' }
+      wiki = Wiki.find_by(user_id: @user.id)
+      patch :update, id: wiki.id, wiki: { title: 'my', body: 'this is my new body, how great', private: true }
+      expect(flash[:error]).to eq('Your wiki failed to update') 
+      expect(response).to redirect_to wiki      
     end
   end
 end
