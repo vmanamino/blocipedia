@@ -124,7 +124,7 @@ describe WikisController do
     end
     it 'redirects to updated wiki' do
       patch :update, id: @wiki.id, wiki: { title: 'my new wiki', body: 'this is my new body, how great', private: true }
-      wiki_updated = Wiki.find(@wiki.id)      
+      wiki_updated = assigns(:wiki)
       expect(response).to redirect_to wiki_updated      
     end
     it 'generates error on failed update: invalid title' do      
