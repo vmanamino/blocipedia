@@ -53,7 +53,7 @@ describe WikisController do
       expect(flash[:notice]).to eq('Your wiki was saved')
     end
     it "automatic value of private is false" do
-      post :create, wiki: { title: 'my wiki', body: 'this is my body, how great, not not sharing it' }      
+      post :create, wiki: { title: 'my wiki', body: 'this is my body, how great, not not sharing it' }
       wiki = assigns(:wiki)
       expect(wiki.private).to be_nil
     end
