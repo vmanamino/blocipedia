@@ -85,15 +85,13 @@ describe WikisController do
       @wiki = create(:wiki, user: @user) 
     end
     it 'a wiki for current user' do
-      wiki = Wiki.find_by(user_id: @user.id)
-      delete :destroy, id: wiki
+      delete :destroy, id: @wiki.id
       expect(flash[:notice]).to eq('Your wiki was deleted successfully.')
       expect(Wiki.find_by(user_id: @user)).to be_nil
       expect(Wiki.count).to eq(0)
     end
     it 'redirects to root' do
-      wiki = Wiki.find_by(user_id: @user.id)
-      delete :destroy, id: wiki
+      delete :destroy, id: @wiki.id
       expect(flash[:notice]).to eq('Your wiki was deleted successfully.')
       expect(response).to redirect_to root_path
     end
