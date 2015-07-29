@@ -5,4 +5,8 @@ describe Wiki do
     @wiki = create(:wiki)
     expect(@wiki).to be_valid
   end
+  it 'belongs to a user' do
+    reflection = Wiki.reflect_on_association(:user)
+    expect(reflection.macro).to eq(:belongs_to)
+  end
 end

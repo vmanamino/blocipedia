@@ -46,16 +46,17 @@ describe WikisController do
     end
   end
   describe '#create' do
+    before do
+      @wiki = create(:wiki, user: @user)
+    end
     it 'a wiki for current user' do
       post :create, wiki: { title: 'my wiki', body: 'this is my body, how great' }
       wiki = assigns(:wiki)
-      expect(wiki.user_id).to eq(@user.id)
+      expect(wiki.user).to eq(@user)
       expect(flash[:notice]).to eq('Your wiki was saved')
     end
-    it "automatic value of private is false" do
-      post :create, wiki: { title: 'my wiki', body: 'this is my body, how great, not not sharing it' }
-      wiki = assigns(:wiki)
-      expect(wiki.private).to be_nil
+    it 'default value of private is false' do
+      expect(@wiki.private).to be(false)
     end
     it 'redirects to newly created wiki' do
       post :create, wiki: { title: 'my wiki', body: 'this is my body, how great' }
@@ -68,21 +69,21 @@ describe WikisController do
     end
     it 'fails to save wiki with [invalid] title too long' do
       post :create, wiki: { title: 'tooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooolooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooongmystriiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiing', body: 'this is my body, how great' } # rubocop:disable Metrics/LineLength
-      expect(flash[:error]).to eq('Your wiki failed to save')      
+      expect(flash[:error]).to eq('Your wiki failed to save')
     end
     it 'fails to save wiki with [invalid] body too short' do
       post :create, wiki: { title: 'my wiki', body: 'this is my body' }
-      expect(flash[:error]).to eq('Your wiki failed to save')      
-    end    
+      expect(flash[:error]).to eq('Your wiki failed to save')
+    end
     it 'redirects to new template on failed save of wiki title too short' do
-      post :create, wiki: { title: 'my', body: 'this is my body, how great' }       
+      post :create, wiki: { title: 'my', body: 'this is my body, how great' }
       expect(response).to render_template('new')
     end
   end
 
   describe '#destroy' do
     before do
-      @wiki = create(:wiki, user: @user) 
+      @wiki = create(:wiki, user: @user)
     end
     it 'a wiki for current user' do
       delete :destroy, id: @wiki.id
@@ -117,23 +118,23 @@ describe WikisController do
     it 'updates a wiki for current user' do
       expect(@wiki.title).to eq('My wiki has a title')
       patch :update, id: @wiki.id, wiki: { title: 'my new wiki', body: 'this is my new body, how great', private: true }
-      wiki_updated = Wiki.find(@wiki.id)      
-      expect(wiki_updated.title).to eq('my new wiki')      
-      expect(wiki_updated.body).to eq('this is my new body, how great')      
+      wiki_updated = Wiki.find(@wiki.id)
+      expect(wiki_updated.title).to eq('my new wiki')
+      expect(wiki_updated.body).to eq('this is my new body, how great')
       expect(wiki_updated.private).to eq(true)
     end
     it 'redirects to updated wiki' do
       patch :update, id: @wiki.id, wiki: { title: 'my new wiki', body: 'this is my new body, how great', private: true }
       wiki_updated = assigns(:wiki)
-      expect(response).to redirect_to wiki_updated      
+      expect(response).to redirect_to wiki_updated
     end
-    it 'generates error on failed update: invalid title' do      
+    it 'generates error on failed update: invalid title' do
       patch :update, id: @wiki.id, wiki: { title: 'my', body: 'this is my new body, how great', private: true }
-      expect(flash[:error]).to eq('Your wiki failed to update')      
+      expect(flash[:error]).to eq('Your wiki failed to update')
     end
-    it 'redirects to wiki which failed to update' do     
-      patch :update, id: @wiki.id, wiki: { title: 'my', body: 'this is my new body, how great', private: true }       
-      expect(response).to redirect_to @wiki      
+    it 'redirects to wiki which failed to update' do
+      patch :update, id: @wiki.id, wiki: { title: 'my', body: 'this is my new body, how great', private: true }
+      expect(response).to redirect_to @wiki
     end
   end
 end
