@@ -72,4 +72,6 @@ gem 'factory_girl_rails', '~> 4.0'
 gem 'whiny_validation'
 # haml for cleaner mark up
 gem 'haml', '~> 4.0.5'
+# pretty URLs via friendly_id
+gem 'friendly_id', '~> 5.1.0'
 
