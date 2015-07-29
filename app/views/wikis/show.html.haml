@@ -1,2 +1,4 @@
 %h1= @wiki.title
-  %p= @wiki.body
+= link_to "Edit", edit_wiki_path(@wiki), class: 'btn btn-success'
+%p= @wiki.body
+
