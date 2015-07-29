@@ -1,19 +1,61 @@
-Inspecting 14 files
-C..........CCC
+Inspecting 21 files
+.................CCCC
 
 Offenses:
 
-Gemfile:73:1: C: 1 trailing blank lines detected.
-spec/features/sign_out_spec.rb:7:1: C: Trailing whitespace detected.
-spec/features/sign_out_spec.rb:17:1: C: Trailing whitespace detected.
-spec/features/sign_out_spec.rb:29:1: C: Trailing whitespace detected.
-spec/features/sign_out_spec.rb:31:1: C: Trailing whitespace detected.
-spec/features/sign_out_spec.rb:32:8: C: Trailing whitespace detected.
-    end      
-       ^^^^^^
-spec/features/sign_in_spec.rb:28:1: C: Extra empty line detected at block body end.
+spec/controllers/wikis_controller.rb:58:8: C: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    it "automatic value of private is false" do
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/controllers/wikis_controller.rb:72:62: C: Trailing whitespace detected.
+      expect(flash[:error]).to eq('Your wiki failed to save')      
+                                                             ^^^^^^
+spec/controllers/wikis_controller.rb:76:62: C: Trailing whitespace detected.
+      expect(flash[:error]).to eq('Your wiki failed to save')      
+                                                             ^^^^^^
+spec/controllers/wikis_controller.rb:77:8: C: Trailing whitespace detected.
+    end    
+       ^^^^
+spec/controllers/wikis_controller.rb:79:78: C: Trailing whitespace detected.
+      post :create, wiki: { title: 'my', body: 'this is my body, how great' }       
+                                                                             ^^^^^^^
+spec/controllers/wikis_controller.rb:86:41: C: Trailing whitespace detected.
+      @wiki = create(:wiki, user: @user) 
+                                        ^
+spec/controllers/wikis_controller.rb:121:41: C: Trailing whitespace detected.
+      wiki_updated = Wiki.find(@wiki.id)      
+                                        ^^^^^^
+spec/controllers/wikis_controller.rb:122:54: C: Trailing whitespace detected.
+      expect(wiki_updated.title).to eq('my new wiki')      
+                                                     ^^^^^^
+spec/controllers/wikis_controller.rb:123:72: C: Trailing whitespace detected.
+      expect(wiki_updated.body).to eq('this is my new body, how great')      
+                                                                       ^^^^^^
+spec/controllers/wikis_controller.rb:129:51: C: Trailing whitespace detected.
+      expect(response).to redirect_to wiki_updated      
+                                                  ^^^^^^
+spec/controllers/wikis_controller.rb:131:60: C: Trailing whitespace detected.
+    it 'generates error on failed update: invalid title' do      
+                                                           ^^^^^^
+spec/controllers/wikis_controller.rb:133:64: C: Trailing whitespace detected.
+      expect(flash[:error]).to eq('Your wiki failed to update')      
+                                                               ^^^^^^
+spec/controllers/wikis_controller.rb:135:53: C: Trailing whitespace detected.
+    it 'redirects to wiki which failed to update' do     
+                                                    ^^^^^
+spec/controllers/wikis_controller.rb:136:112: C: Trailing whitespace detected.
+      patch :update, id: @wiki.id, wiki: { title: 'my', body: 'this is my new body, how great', private: true }       
+                                                                                                               ^^^^^^^
+spec/controllers/wikis_controller.rb:137:44: C: Trailing whitespace detected.
+      expect(response).to redirect_to @wiki      
+                                           ^^^^^^
 spec/spec_helper.rb:45:1: C: Do not use block comments.
-=begin # rubocop:disable Rails/BlockComments
+=begin # rubocop:disable Style/BlockComments
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/models/wiki_spec.rb:10:48: C: Trailing whitespace detected.
+    expect(reflection.macro).to eq(:belongs_to)    
+                                               ^^^^
+spec/models/user_spec.rb:12:4: C: Final newline missing.
+end
+   
 
-14 files inspected, 8 offenses detected
+21 files inspected, 18 offenses detected

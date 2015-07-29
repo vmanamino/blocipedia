@@ -1,7 +1,7 @@
 require 'rails_helper'
 describe 'Sign out flow' do
   describe 'Successful sign out' do
-    it 'redicts to the welcome index view and indicates successful sign out' do
+    it 'redirects to the welcome index view and indicates successful sign out' do
       user = create(:user)
       visit root_path
       within('.user-info') do

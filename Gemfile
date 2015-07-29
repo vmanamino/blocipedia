@@ -70,3 +70,5 @@ gem 'faker'
 gem 'devise'
 # use FactoryGirls for rspec tests
 gem 'factory_girl_rails', '~> 4.0'
+# more precise logs for tests
+gem 'whiny_validation'
