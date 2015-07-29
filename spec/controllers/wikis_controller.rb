@@ -46,9 +46,6 @@ describe WikisController do
     end
   end
   describe '#create' do
-    before do
-      @wiki = create(:wiki, user: @user)
-    end
     it 'a wiki for current user' do
       post :create, wiki: { title: 'my wiki', body: 'this is my body, how great' }
       wiki = assigns(:wiki)
@@ -56,6 +53,7 @@ describe WikisController do
       expect(flash[:notice]).to eq('Your wiki was saved')
     end
     it 'default value of private is false' do
+      @wiki = create(:wiki)
       expect(@wiki.private).to be(false)
     end
     it 'redirects to newly created wiki' do
