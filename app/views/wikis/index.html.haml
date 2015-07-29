@@ -1,0 +1,7 @@
+%h1 All Wikis
+- @wikis.each do |wiki|
+  .media
+    .media-body
+      .media-heading
+        %p= link_to wiki.title, wiki
+        

@@ -60,8 +60,6 @@ end
 
 gem 'figaro', '1.0'
 
-# instead of erb files, use haml
-gem 'haml'
 
 # bootstrap style
 gem 'bootstrap-sass'
@@ -72,3 +70,6 @@ gem 'devise'
 gem 'factory_girl_rails', '~> 4.0'
 # more precise logs for tests
 gem 'whiny_validation'
+# haml for cleaner mark up
+gem 'haml', '~> 4.0.5'
+
