@@ -51,7 +51,7 @@ describe WikisController do
     end
     it 'a wiki for current user' do
       post :create, wiki: { title: 'my wiki', body: 'this is my body, how great' }
-      wiki = assigns(:wiki)
+      wiki = assigns(:wiki)      
       expect(wiki.user).to eq(@user)
       expect(flash[:notice]).to eq('Your wiki was saved')
     end
