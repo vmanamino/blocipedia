@@ -52,10 +52,6 @@ describe WikisController do
       expect(wiki.user).to eq(@user)
       expect(flash[:notice]).to eq('Your wiki was saved')
     end
-    it 'default value of private is false' do
-      @wiki = create(:wiki)
-      expect(@wiki.private).to be(false)
-    end
     it 'redirects to newly created wiki' do
       post :create, wiki: { title: 'my wiki', body: 'this is my body, how great' }
       wiki_path = assigns(:wiki)

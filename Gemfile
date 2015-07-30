@@ -74,4 +74,6 @@ gem 'whiny_validation'
 gem 'haml', '~> 4.0.5'
 # pretty URLs via friendly_id
 gem 'friendly_id', '~> 5.1.0'
+# pundit for authorization
+gem 'pundit'
 

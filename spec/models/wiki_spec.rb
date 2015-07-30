@@ -9,4 +9,8 @@ describe Wiki do
     reflection = Wiki.reflect_on_association(:user)
     expect(reflection.macro).to eq(:belongs_to)
   end
+  it 'default value of private is false' do
+      @wiki = create(:wiki)
+      expect(@wiki.private).to be(false)
+  end
 end
