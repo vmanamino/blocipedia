@@ -10,7 +10,7 @@ describe Wiki do
     expect(reflection.macro).to eq(:belongs_to)
   end
   it 'default value of private is false' do
-      @wiki = create(:wiki)
-      expect(@wiki.private).to be(false)
+    @wiki = create(:wiki)
+    expect(@wiki.private).to be(false)
   end
 end

@@ -59,8 +59,6 @@ group :development, :test do
 end
 
 gem 'figaro', '1.0'
-
-
 # bootstrap style
 gem 'bootstrap-sass'
 gem 'faker'
@@ -76,4 +74,3 @@ gem 'haml', '~> 4.0.5'
 gem 'friendly_id', '~> 5.1.0'
 # pundit for authorization
 gem 'pundit'
-
