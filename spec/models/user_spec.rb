@@ -9,4 +9,8 @@ describe User do
     reflection = User.reflect_on_association(:wikis)
     expect(reflection.macro).to eq(:has_many)
   end
+  it 'has default role standard' do
+    @user = create(:user)
+    expect(@user.role).to eq('standard')
+  end
 end
