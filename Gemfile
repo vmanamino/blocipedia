@@ -74,3 +74,5 @@ gem 'haml', '~> 4.0.5'
 gem 'friendly_id', '~> 5.1.0'
 # pundit for authorization
 gem 'pundit'
+# test code coverage
+gem 'simplecov', require: false, group: :test
