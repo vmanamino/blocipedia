@@ -6,7 +6,10 @@ class WikisController < ApplicationController
   end
 
   def show
-    @wiki = Wiki.find(params[:id])
+    @wiki = Wiki.friendly.find(params[:id])
+    if request.path != wiki_path(@wiki) # rubocop:disable Style/GuardClause
+      redirect_to @wiki, status: :moved_permanently
+    end
   end
 
   def new
@@ -14,7 +17,7 @@ class WikisController < ApplicationController
   end
 
   def create
-    @wiki = current_user.wikis.build(wiki_params)
+    @wiki = current_user.wikis.build(wiki_params)     
     if @wiki.save
       flash[:notice] = 'Your wiki was saved'
       redirect_to @wiki
@@ -25,11 +28,12 @@ class WikisController < ApplicationController
   end
 
   def edit
-    @wiki = Wiki.find(params[:id])
+    @wiki = Wiki.friendly.find(params[:id])
   end
 
   def update
-    @wiki = Wiki.find(params[:id])
+    @wiki = Wiki.friendly.find(params[:id])
+    @wiki.slug = nil
     if @wiki.update_attributes(wiki_params)
       flash[:notice] = 'Your wiki was updated'
       redirect_to @wiki
@@ -40,7 +44,7 @@ class WikisController < ApplicationController
   end
 
   def destroy
-    @wiki = Wiki.find(params[:id])
+    @wiki = Wiki.friendly.find(params[:id])
     if @wiki.destroy
       flash[:notice] = 'Your wiki was deleted successfully.'
       redirect_to root_path
