@@ -19,8 +19,8 @@ shared_examples 'application_policy' do
     end
   end
   permissions :show? do
-    it 'successful show when stubbed user visits' do
-      youser = double()
+    it 'successful show to web site visitor' do
+      youser = double
       expect(subject).to permit(youser, wiki)
     end
   end

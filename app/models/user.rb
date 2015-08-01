@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
   def premium?
     role == 'premium'
   end
-  
+
   private
 
   def defaults

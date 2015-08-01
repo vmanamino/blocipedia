@@ -14,9 +14,9 @@ describe WikiPolicy do
     before do
       @wiki_list = create_list(:wiki, 10)
     end
-      it 'allows index view of wikis' do
-        expect(subject).to permit(@wiki_list)
-      end
+    it 'allows index view of wikis' do
+      expect(subject).to permit(@wiki_list)
+    end
   end
   permissions :destroy? do
     it 'allows user owner to destroy wiki' do
