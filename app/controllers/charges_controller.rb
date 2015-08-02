@@ -21,7 +21,7 @@ class ChargesController < ApplicationController
       currency: 'usd'
       )
     flash[:success] = 'Thanks for all the money, #{current_user.email}.  Pay me some more!'
-    redirect_to user_path(current_user)
+    redirect_to root_path
     
     # Error handling
   rescue Stripe::CardError => e
