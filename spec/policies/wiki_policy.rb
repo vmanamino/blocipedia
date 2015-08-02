@@ -7,16 +7,28 @@ describe WikiPolicy do
   subject { WikiPolicy }
   let(:user) { create(:user) }
   let(:wiki) { create(:wiki, user: user) }
-  permissions :edit?, :show?, :create? do
-    it_should_behave_like 'application_policy'
-  end
   permissions :index? do
     before do
       @wiki_list = create_list(:wiki, 10)
     end
-    it 'allows index view of wikis' do
+    it 'permits view of all wikis' do
       expect(subject).to permit(@wiki_list)
     end
+  end
+  permissions :show? do
+    it_behaves_like 'application_policy_show'
+  end
+  permissions :create? do
+    it_behaves_like 'application_policy_create'
+  end
+  permissions :new?  do
+    it_behaves_like 'application_policy_new'
+  end
+  permissions :update? do
+    it_behaves_like 'application_policy_update'
+  end
+  permissions :edit? do
+    it_behaves_like 'application_policy_edit'
   end
   permissions :destroy? do
     it 'allows user owner to destroy wiki' do
