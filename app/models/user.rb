@@ -21,6 +21,6 @@ class User < ActiveRecord::Base
   private
 
   def defaults
-    self.role ||= 'standard'
+    role ||= 'standard'
   end
 end
