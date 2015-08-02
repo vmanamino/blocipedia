@@ -6,8 +6,8 @@
         1,
         null,
         1,
-        4,
-        4,
+        9,
+        9,
         null,
         null,
         1,
@@ -19,7 +19,7 @@
         null,
         null,
         1,
-        1,
+        2,
         null,
         null,
         1,
@@ -31,7 +31,7 @@
         null,
         null,
         1,
-        2,
+        0,
         null,
         null,
         1,
@@ -59,11 +59,11 @@
       "/home/action/code/blocipedia/app/policies/wiki_policy.rb": [
         1,
         1,
-        0,
+        1,
         null,
         null,
         1,
-        0,
+        3,
         null,
         null
       ],
@@ -80,6 +80,6 @@
         null
       ]
     },
-    "timestamp": 1438449563
+    "timestamp": 1438550737
   }
 }
