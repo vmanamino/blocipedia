@@ -1,0 +1,263 @@
+Running `rake db:reset` attached to terminal... up, run.8115
+FATAL:  permission denied for database "postgres"
+DETAIL:  User does not have CONNECT privilege.
+/app/vendor/bundle/ruby/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/postgresql_adapter.rb:651:in `initialize'
+/app/vendor/bundle/ruby/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/postgresql_adapter.rb:651:in `new'
+/app/vendor/bundle/ruby/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/postgresql_adapter.rb:651:in `connect'
+/app/vendor/bundle/ruby/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/postgresql_adapter.rb:242:in `initialize'
+/app/vendor/bundle/ruby/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/postgresql_adapter.rb:44:in `new'
+/app/vendor/bundle/ruby/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/postgresql_adapter.rb:44:in `postgresql_connection'
+/app/vendor/bundle/ruby/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/abstract/connection_pool.rb:438:in `new_connection'
+/app/vendor/bundle/ruby/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/abstract/connection_pool.rb:448:in `checkout_new_connection'
+/app/vendor/bundle/ruby/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/abstract/connection_pool.rb:422:in `acquire_connection'
+/app/vendor/bundle/ruby/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/abstract/connection_pool.rb:349:in `block in checkout'
+/app/vendor/ruby-2.0.0/lib/ruby/2.0.0/monitor.rb:211:in `mon_synchronize'
+/app/vendor/bundle/ruby/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/abstract/connection_pool.rb:348:in `checkout'
+/app/vendor/bundle/ruby/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/abstract/connection_pool.rb:263:in `block in connection'
+/app/vendor/ruby-2.0.0/lib/ruby/2.0.0/monitor.rb:211:in `mon_synchronize'
+/app/vendor/bundle/ruby/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/abstract/connection_pool.rb:262:in `connection'
+/app/vendor/bundle/ruby/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/abstract/connection_pool.rb:567:in `retrieve_connection'
+/app/vendor/bundle/ruby/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_handling.rb:113:in `retrieve_connection'
+/app/vendor/bundle/ruby/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_handling.rb:87:in `connection'
+/app/vendor/bundle/ruby/2.0.0/gems/activerecord-4.2.1/lib/active_record/tasks/postgresql_database_tasks.rb:8:in `connection'
+/app/vendor/bundle/ruby/2.0.0/gems/activerecord-4.2.1/lib/active_record/tasks/postgresql_database_tasks.rb:30:in `drop'
+/app/vendor/bundle/ruby/2.0.0/gems/activerecord-4.2.1/lib/active_record/tasks/database_tasks.rb:114:in `drop'
+/app/vendor/bundle/ruby/2.0.0/gems/activerecord-4.2.1/lib/active_record/tasks/database_tasks.rb:128:in `block in drop_current'
+/app/vendor/bundle/ruby/2.0.0/gems/activerecord-4.2.1/lib/active_record/tasks/database_tasks.rb:275:in `block in each_current_configuration'
+/app/vendor/bundle/ruby/2.0.0/gems/activerecord-4.2.1/lib/active_record/tasks/database_tasks.rb:274:in `each'
+/app/vendor/bundle/ruby/2.0.0/gems/activerecord-4.2.1/lib/active_record/tasks/database_tasks.rb:274:in `each_current_configuration'
+/app/vendor/bundle/ruby/2.0.0/gems/activerecord-4.2.1/lib/active_record/tasks/database_tasks.rb:127:in `drop_current'
+/app/vendor/bundle/ruby/2.0.0/gems/activerecord-4.2.1/lib/active_record/railties/databases.rake:28:in `block (2 levels) in <top (required)>'
+/app/vendor/bundle/ruby/2.0.0/gems/rake-10.4.2/lib/rake/task.rb:240:in `call'
+/app/vendor/bundle/ruby/2.0.0/gems/rake-10.4.2/lib/rake/task.rb:240:in `block in execute'
+/app/vendor/bundle/ruby/2.0.0/gems/rake-10.4.2/lib/rake/task.rb:235:in `each'
+/app/vendor/bundle/ruby/2.0.0/gems/rake-10.4.2/lib/rake/task.rb:235:in `execute'
+/app/vendor/bundle/ruby/2.0.0/gems/rake-10.4.2/lib/rake/task.rb:179:in `block in invoke_with_call_chain'
+/app/vendor/ruby-2.0.0/lib/ruby/2.0.0/monitor.rb:211:in `mon_synchronize'
+/app/vendor/bundle/ruby/2.0.0/gems/rake-10.4.2/lib/rake/task.rb:172:in `invoke_with_call_chain'
+/app/vendor/bundle/ruby/2.0.0/gems/rake-10.4.2/lib/rake/task.rb:165:in `invoke'
+/app/vendor/bundle/ruby/2.0.0/gems/activerecord-4.2.1/lib/active_record/railties/databases.rake:138:in `block (2 levels) in <top (required)>'
+/app/vendor/bundle/ruby/2.0.0/gems/rake-10.4.2/lib/rake/task.rb:240:in `call'
+/app/vendor/bundle/ruby/2.0.0/gems/rake-10.4.2/lib/rake/task.rb:240:in `block in execute'
+/app/vendor/bundle/ruby/2.0.0/gems/rake-10.4.2/lib/rake/task.rb:235:in `each'
+/app/vendor/bundle/ruby/2.0.0/gems/rake-10.4.2/lib/rake/task.rb:235:in `execute'
+/app/vendor/bundle/ruby/2.0.0/gems/rake-10.4.2/lib/rake/task.rb:179:in `block in invoke_with_call_chain'
+/app/vendor/ruby-2.0.0/lib/ruby/2.0.0/monitor.rb:211:in `mon_synchronize'
+/app/vendor/bundle/ruby/2.0.0/gems/rake-10.4.2/lib/rake/task.rb:172:in `invoke_with_call_chain'
+/app/vendor/bundle/ruby/2.0.0/gems/rake-10.4.2/lib/rake/task.rb:165:in `invoke'
+/app/vendor/bundle/ruby/2.0.0/gems/rake-10.4.2/lib/rake/application.rb:150:in `invoke_task'
+/app/vendor/bundle/ruby/2.0.0/gems/rake-10.4.2/lib/rake/application.rb:106:in `block (2 levels) in top_level'
+/app/vendor/bundle/ruby/2.0.0/gems/rake-10.4.2/lib/rake/application.rb:106:in `each'
+/app/vendor/bundle/ruby/2.0.0/gems/rake-10.4.2/lib/rake/application.rb:106:in `block in top_level'
+/app/vendor/bundle/ruby/2.0.0/gems/rake-10.4.2/lib/rake/application.rb:115:in `run_with_threads'
+/app/vendor/bundle/ruby/2.0.0/gems/rake-10.4.2/lib/rake/application.rb:100:in `top_level'
+/app/vendor/bundle/ruby/2.0.0/gems/rake-10.4.2/lib/rake/application.rb:78:in `block in run'
+/app/vendor/bundle/ruby/2.0.0/gems/rake-10.4.2/lib/rake/application.rb:176:in `standard_exception_handling'
+/app/vendor/bundle/ruby/2.0.0/gems/rake-10.4.2/lib/rake/application.rb:75:in `run'
+/app/vendor/bundle/ruby/2.0.0/gems/rake-10.4.2/bin/rake:33:in `<top (required)>'
+/app/vendor/bundle/ruby/2.0.0/bin/rake:23:in `load'
+/app/vendor/bundle/ruby/2.0.0/bin/rake:23:in `<main>'
+Couldn't drop dfe7th6m3hs2pr
+FATAL:  permission denied for database "postgres"
+DETAIL:  User does not have CONNECT privilege.
+/app/vendor/bundle/ruby/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/postgresql_adapter.rb:651:in `initialize'
+/app/vendor/bundle/ruby/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/postgresql_adapter.rb:651:in `new'
+/app/vendor/bundle/ruby/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/postgresql_adapter.rb:651:in `connect'
+/app/vendor/bundle/ruby/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/postgresql_adapter.rb:242:in `initialize'
+/app/vendor/bundle/ruby/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/postgresql_adapter.rb:44:in `new'
+/app/vendor/bundle/ruby/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/postgresql_adapter.rb:44:in `postgresql_connection'
+/app/vendor/bundle/ruby/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/abstract/connection_pool.rb:438:in `new_connection'
+/app/vendor/bundle/ruby/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/abstract/connection_pool.rb:448:in `checkout_new_connection'
+/app/vendor/bundle/ruby/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/abstract/connection_pool.rb:422:in `acquire_connection'
+/app/vendor/bundle/ruby/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/abstract/connection_pool.rb:349:in `block in checkout'
+/app/vendor/ruby-2.0.0/lib/ruby/2.0.0/monitor.rb:211:in `mon_synchronize'
+/app/vendor/bundle/ruby/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/abstract/connection_pool.rb:348:in `checkout'
+/app/vendor/bundle/ruby/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/abstract/connection_pool.rb:263:in `block in connection'
+/app/vendor/ruby-2.0.0/lib/ruby/2.0.0/monitor.rb:211:in `mon_synchronize'
+/app/vendor/bundle/ruby/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/abstract/connection_pool.rb:262:in `connection'
+/app/vendor/bundle/ruby/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/abstract/connection_pool.rb:567:in `retrieve_connection'
+/app/vendor/bundle/ruby/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_handling.rb:113:in `retrieve_connection'
+/app/vendor/bundle/ruby/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_handling.rb:87:in `connection'
+/app/vendor/bundle/ruby/2.0.0/gems/activerecord-4.2.1/lib/active_record/tasks/postgresql_database_tasks.rb:8:in `connection'
+/app/vendor/bundle/ruby/2.0.0/gems/activerecord-4.2.1/lib/active_record/tasks/postgresql_database_tasks.rb:17:in `create'
+/app/vendor/bundle/ruby/2.0.0/gems/activerecord-4.2.1/lib/active_record/tasks/database_tasks.rb:93:in `create'
+/app/vendor/bundle/ruby/2.0.0/gems/activerecord-4.2.1/lib/active_record/tasks/database_tasks.rb:107:in `block in create_current'
+/app/vendor/bundle/ruby/2.0.0/gems/activerecord-4.2.1/lib/active_record/tasks/database_tasks.rb:275:in `block in each_current_configuration'
+/app/vendor/bundle/ruby/2.0.0/gems/activerecord-4.2.1/lib/active_record/tasks/database_tasks.rb:274:in `each'
+/app/vendor/bundle/ruby/2.0.0/gems/activerecord-4.2.1/lib/active_record/tasks/database_tasks.rb:274:in `each_current_configuration'
+/app/vendor/bundle/ruby/2.0.0/gems/activerecord-4.2.1/lib/active_record/tasks/database_tasks.rb:106:in `create_current'
+/app/vendor/bundle/ruby/2.0.0/gems/activerecord-4.2.1/lib/active_record/railties/databases.rake:17:in `block (2 levels) in <top (required)>'
+/app/vendor/bundle/ruby/2.0.0/gems/rake-10.4.2/lib/rake/task.rb:240:in `call'
+/app/vendor/bundle/ruby/2.0.0/gems/rake-10.4.2/lib/rake/task.rb:240:in `block in execute'
+/app/vendor/bundle/ruby/2.0.0/gems/rake-10.4.2/lib/rake/task.rb:235:in `each'
+/app/vendor/bundle/ruby/2.0.0/gems/rake-10.4.2/lib/rake/task.rb:235:in `execute'
+/app/vendor/bundle/ruby/2.0.0/gems/rake-10.4.2/lib/rake/task.rb:179:in `block in invoke_with_call_chain'
+/app/vendor/ruby-2.0.0/lib/ruby/2.0.0/monitor.rb:211:in `mon_synchronize'
+/app/vendor/bundle/ruby/2.0.0/gems/rake-10.4.2/lib/rake/task.rb:172:in `invoke_with_call_chain'
+/app/vendor/bundle/ruby/2.0.0/gems/rake-10.4.2/lib/rake/task.rb:201:in `block in invoke_prerequisites'
+/app/vendor/bundle/ruby/2.0.0/gems/rake-10.4.2/lib/rake/task.rb:199:in `each'
+/app/vendor/bundle/ruby/2.0.0/gems/rake-10.4.2/lib/rake/task.rb:199:in `invoke_prerequisites'
+/app/vendor/bundle/ruby/2.0.0/gems/rake-10.4.2/lib/rake/task.rb:178:in `block in invoke_with_call_chain'
+/app/vendor/ruby-2.0.0/lib/ruby/2.0.0/monitor.rb:211:in `mon_synchronize'
+/app/vendor/bundle/ruby/2.0.0/gems/rake-10.4.2/lib/rake/task.rb:172:in `invoke_with_call_chain'
+/app/vendor/bundle/ruby/2.0.0/gems/rake-10.4.2/lib/rake/task.rb:201:in `block in invoke_prerequisites'
+/app/vendor/bundle/ruby/2.0.0/gems/rake-10.4.2/lib/rake/task.rb:199:in `each'
+/app/vendor/bundle/ruby/2.0.0/gems/rake-10.4.2/lib/rake/task.rb:199:in `invoke_prerequisites'
+/app/vendor/bundle/ruby/2.0.0/gems/rake-10.4.2/lib/rake/task.rb:178:in `block in invoke_with_call_chain'
+/app/vendor/ruby-2.0.0/lib/ruby/2.0.0/monitor.rb:211:in `mon_synchronize'
+/app/vendor/bundle/ruby/2.0.0/gems/rake-10.4.2/lib/rake/task.rb:172:in `invoke_with_call_chain'
+/app/vendor/bundle/ruby/2.0.0/gems/rake-10.4.2/lib/rake/task.rb:165:in `invoke'
+/app/vendor/bundle/ruby/2.0.0/gems/activerecord-4.2.1/lib/active_record/railties/databases.rake:139:in `block (2 levels) in <top (required)>'
+/app/vendor/bundle/ruby/2.0.0/gems/rake-10.4.2/lib/rake/task.rb:240:in `call'
+/app/vendor/bundle/ruby/2.0.0/gems/rake-10.4.2/lib/rake/task.rb:240:in `block in execute'
+/app/vendor/bundle/ruby/2.0.0/gems/rake-10.4.2/lib/rake/task.rb:235:in `each'
+/app/vendor/bundle/ruby/2.0.0/gems/rake-10.4.2/lib/rake/task.rb:235:in `execute'
+/app/vendor/bundle/ruby/2.0.0/gems/rake-10.4.2/lib/rake/task.rb:179:in `block in invoke_with_call_chain'
+/app/vendor/ruby-2.0.0/lib/ruby/2.0.0/monitor.rb:211:in `mon_synchronize'
+/app/vendor/bundle/ruby/2.0.0/gems/rake-10.4.2/lib/rake/task.rb:172:in `invoke_with_call_chain'
+/app/vendor/bundle/ruby/2.0.0/gems/rake-10.4.2/lib/rake/task.rb:165:in `invoke'
+/app/vendor/bundle/ruby/2.0.0/gems/rake-10.4.2/lib/rake/application.rb:150:in `invoke_task'
+/app/vendor/bundle/ruby/2.0.0/gems/rake-10.4.2/lib/rake/application.rb:106:in `block (2 levels) in top_level'
+/app/vendor/bundle/ruby/2.0.0/gems/rake-10.4.2/lib/rake/application.rb:106:in `each'
+/app/vendor/bundle/ruby/2.0.0/gems/rake-10.4.2/lib/rake/application.rb:106:in `block in top_level'
+/app/vendor/bundle/ruby/2.0.0/gems/rake-10.4.2/lib/rake/application.rb:115:in `run_with_threads'
+/app/vendor/bundle/ruby/2.0.0/gems/rake-10.4.2/lib/rake/application.rb:100:in `top_level'
+/app/vendor/bundle/ruby/2.0.0/gems/rake-10.4.2/lib/rake/application.rb:78:in `block in run'
+/app/vendor/bundle/ruby/2.0.0/gems/rake-10.4.2/lib/rake/application.rb:176:in `standard_exception_handling'
+/app/vendor/bundle/ruby/2.0.0/gems/rake-10.4.2/lib/rake/application.rb:75:in `run'
+/app/vendor/bundle/ruby/2.0.0/gems/rake-10.4.2/bin/rake:33:in `<top (required)>'
+/app/vendor/bundle/ruby/2.0.0/bin/rake:23:in `load'
+/app/vendor/bundle/ruby/2.0.0/bin/rake:23:in `<main>'
+Couldn't create database for {"adapter"=>"postgresql", "pool"=>5, "timeout"=>5000, "database"=>"dfe7th6m3hs2pr", "username"=>"hesojqrdqibzfo", "password"=>"rKJLQFnfS4lqd0iwU879H2m58Q", "port"=>5432, "host"=>"ec2-54-225-134-223.compute-1.amazonaws.com"}
+-- create_table("amounts", {:force=>:cascade})
+  [1m[36m (19.8ms)[0m  [1mDROP TABLE "amounts" CASCADE[0m
+  [1m[35m (21.0ms)[0m  CREATE TABLE "amounts" ("id" serial primary key, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, "amount" integer) 
+   -> 0.0904s
+-- create_table("friendly_id_slugs", {:force=>:cascade})
+  [1m[36m (12.1ms)[0m  [1mDROP TABLE "friendly_id_slugs" CASCADE[0m
+  [1m[35m (14.2ms)[0m  CREATE TABLE "friendly_id_slugs" ("id" serial primary key, "slug" character varying NOT NULL, "sluggable_id" integer NOT NULL, "sluggable_type" character varying(50), "scope" character varying, "created_at" timestamp) 
+   -> 0.0393s
+-- add_index("friendly_id_slugs", ["slug", "sluggable_type", "scope"], {:name=>"index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", :unique=>true})
+  [1m[36m (5.9ms)[0m  [1mCREATE UNIQUE INDEX  "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope" ON "friendly_id_slugs"  ("slug", "sluggable_type", "scope")[0m
+   -> 0.0124s
+-- add_index("friendly_id_slugs", ["slug", "sluggable_type"], {:name=>"index_friendly_id_slugs_on_slug_and_sluggable_type"})
+  [1m[35m (4.8ms)[0m  CREATE  INDEX  "index_friendly_id_slugs_on_slug_and_sluggable_type" ON "friendly_id_slugs"  ("slug", "sluggable_type")
+   -> 0.0104s
+-- add_index("friendly_id_slugs", ["sluggable_id"], {:name=>"index_friendly_id_slugs_on_sluggable_id"})
+  [1m[36m (4.8ms)[0m  [1mCREATE  INDEX  "index_friendly_id_slugs_on_sluggable_id" ON "friendly_id_slugs"  ("sluggable_id")[0m
+   -> 0.0127s
+-- add_index("friendly_id_slugs", ["sluggable_type"], {:name=>"index_friendly_id_slugs_on_sluggable_type"})
+  [1m[35m (4.9ms)[0m  CREATE  INDEX  "index_friendly_id_slugs_on_sluggable_type" ON "friendly_id_slugs"  ("sluggable_type")
+   -> 0.0124s
+-- create_table("users", {:force=>:cascade})
+  [1m[36m (12.5ms)[0m  [1mDROP TABLE "users" CASCADE[0m
+  [1m[35m (20.8ms)[0m  CREATE TABLE "users" ("id" serial primary key, "name" character varying, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" timestamp, "last_sign_in_at" timestamp, "current_sign_in_ip" character varying, "last_sign_in_ip" character varying, "confirmation_token" character varying, "confirmed_at" timestamp, "confirmation_sent_at" timestamp, "unconfirmed_email" character varying, "created_at" timestamp, "updated_at" timestamp, "role" character varying) 
+   -> 0.0432s
+-- add_index("users", ["email"], {:name=>"index_users_on_email", :unique=>true})
+  [1m[36m (4.7ms)[0m  [1mCREATE UNIQUE INDEX  "index_users_on_email" ON "users"  ("email")[0m
+   -> 0.0098s
+-- add_index("users", ["reset_password_token"], {:name=>"index_users_on_reset_password_token", :unique=>true})
+  [1m[35m (5.0ms)[0m  CREATE UNIQUE INDEX  "index_users_on_reset_password_token" ON "users"  ("reset_password_token")
+   -> 0.0098s
+-- create_table("wikis", {:force=>:cascade})
+  [1m[36m (10.6ms)[0m  [1mDROP TABLE "wikis" CASCADE[0m
+  [1m[35m (19.5ms)[0m  CREATE TABLE "wikis" ("id" serial primary key, "title" character varying, "body" text, "private" boolean, "user_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, "slug" character varying) 
+   -> 0.0339s
+-- add_index("wikis", ["slug"], {:name=>"index_wikis_on_slug", :unique=>true})
+  [1m[36m (4.7ms)[0m  [1mCREATE UNIQUE INDEX  "index_wikis_on_slug" ON "wikis"  ("slug")[0m
+   -> 0.0114s
+-- add_index("wikis", ["user_id"], {:name=>"index_wikis_on_user_id"})
+  [1m[35m (4.5ms)[0m  CREATE  INDEX  "index_wikis_on_user_id" ON "wikis"  ("user_id")
+   -> 0.0091s
+-- initialize_schema_migrations_table()
+   -> 0.0062s
+  [1m[36m (1.4ms)[0m  [1mSELECT version FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (1.4ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (1.5ms)[0m  [1mBEGIN[0m
+  [1m[35mUser Exists (9.0ms)[0m  SELECT  1 AS one FROM "users" WHERE "users"."email" = 'keira.fadel@abernathy.biz' LIMIT 1
+  [1m[36mUser Load (1.9ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."confirmation_token" = $1  ORDER BY "users"."id" ASC LIMIT 1[0m  [["confirmation_token", "1ff6d162b25cd3bc0dee9f9f06f04766c00e15b48947a56a1785ac8ec4913a58"]]
+  [1m[35mSQL (5.7ms)[0m  INSERT INTO "users" ("name", "email", "encrypted_password", "created_at", "updated_at", "confirmation_token", "confirmation_sent_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"  [["name", "Lance Schuppe"], ["email", "keira.fadel@abernathy.biz"], ["encrypted_password", "$2a$10$EBboJNvVsCczNYYxmgeUU.G7zUd9spY5/oOlAWIMIt5xPb7Qm56tK"], ["created_at", "2015-08-02 04:16:33.511045"], ["updated_at", "2015-08-02 04:16:33.511045"], ["confirmation_token", "1ff6d162b25cd3bc0dee9f9f06f04766c00e15b48947a56a1785ac8ec4913a58"], ["confirmation_sent_at", "2015-08-02 04:16:34.100221"]]
+  Rendered devise/mailer/confirmation_instructions.html.erb (3.8ms)
+
+Devise::Mailer#confirmation_instructions: processed outbound mail in 310.1ms
+
+Sent mail to keira.fadel@abernathy.biz (10.6ms)
+Date: Sun, 02 Aug 2015 04:16:34 +0000
+From: please-change-me-at-config-initializers-devise@example.com
+Reply-To: please-change-me-at-config-initializers-devise@example.com
+To: keira.fadel@abernathy.biz
+Message-ID: <55bd99a271ef8_33ff0676bbe84920be@280cb7a1-dd0e-48f1-95c4-cc1333e870b1.mail>
+Subject: Confirmation instructions
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<p>Welcome keira.fadel@abernathy.biz!</p>
+
+<p>You can confirm your account email through the link below:</p>
+
+<p><a href="http://viral-blocipedia.herokuapp.com/users/confirmation?confirmation_token=qhQ_1C3vaR-zxEBR36d9">Confirm my account</a></p>
+
+  [1m[36m (1.3ms)[0m  [1mROLLBACK[0m
+rake aborted!
+Errno::ECONNREFUSED: Connection refused - connect(2)
+/app/vendor/bundle/ruby/2.0.0/gems/mail-2.6.3/lib/mail/network/delivery_methods/smtp.rb:112:in `deliver!'
+/app/vendor/bundle/ruby/2.0.0/gems/mail-2.6.3/lib/mail/message.rb:2141:in `do_delivery'
+/app/vendor/bundle/ruby/2.0.0/gems/mail-2.6.3/lib/mail/message.rb:236:in `block in deliver'
+/app/vendor/bundle/ruby/2.0.0/gems/actionmailer-4.2.1/lib/action_mailer/base.rb:543:in `block in deliver_mail'
+/app/vendor/bundle/ruby/2.0.0/gems/activesupport-4.2.1/lib/active_support/notifications.rb:164:in `block in instrument'
+/app/vendor/bundle/ruby/2.0.0/gems/activesupport-4.2.1/lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+/app/vendor/bundle/ruby/2.0.0/gems/activesupport-4.2.1/lib/active_support/notifications.rb:164:in `instrument'
+/app/vendor/bundle/ruby/2.0.0/gems/actionmailer-4.2.1/lib/action_mailer/base.rb:541:in `deliver_mail'
+/app/vendor/bundle/ruby/2.0.0/gems/mail-2.6.3/lib/mail/message.rb:236:in `deliver'
+/app/vendor/bundle/ruby/2.0.0/gems/actionmailer-4.2.1/lib/action_mailer/message_delivery.rb:85:in `deliver_now'
+/app/vendor/bundle/ruby/2.0.0/gems/devise-3.4.1/lib/devise/models/authenticatable.rb:176:in `send_devise_notification'
+/app/vendor/bundle/ruby/2.0.0/gems/devise-3.4.1/lib/devise/models/confirmable.rb:102:in `send_confirmation_instructions'
+/app/vendor/bundle/ruby/2.0.0/gems/devise-3.4.1/lib/devise/models/confirmable.rb:158:in `send_on_create_confirmation_instructions'
+/app/vendor/bundle/ruby/2.0.0/gems/activesupport-4.2.1/lib/active_support/callbacks.rb:432:in `block in make_lambda'
+/app/vendor/bundle/ruby/2.0.0/gems/activesupport-4.2.1/lib/active_support/callbacks.rb:228:in `call'
+/app/vendor/bundle/ruby/2.0.0/gems/activesupport-4.2.1/lib/active_support/callbacks.rb:228:in `block in halting_and_conditional'
+/app/vendor/bundle/ruby/2.0.0/gems/activesupport-4.2.1/lib/active_support/callbacks.rb:506:in `call'
+/app/vendor/bundle/ruby/2.0.0/gems/activesupport-4.2.1/lib/active_support/callbacks.rb:506:in `block in call'
+/app/vendor/bundle/ruby/2.0.0/gems/activesupport-4.2.1/lib/active_support/callbacks.rb:506:in `each'
+/app/vendor/bundle/ruby/2.0.0/gems/activesupport-4.2.1/lib/active_support/callbacks.rb:506:in `call'
+/app/vendor/bundle/ruby/2.0.0/gems/activesupport-4.2.1/lib/active_support/callbacks.rb:92:in `_run_callbacks'
+/app/vendor/bundle/ruby/2.0.0/gems/activesupport-4.2.1/lib/active_support/callbacks.rb:776:in `_run_create_callbacks'
+/app/vendor/bundle/ruby/2.0.0/gems/activerecord-4.2.1/lib/active_record/callbacks.rb:306:in `_create_record'
+/app/vendor/bundle/ruby/2.0.0/gems/activerecord-4.2.1/lib/active_record/timestamp.rb:57:in `_create_record'
+/app/vendor/bundle/ruby/2.0.0/gems/activerecord-4.2.1/lib/active_record/persistence.rb:502:in `create_or_update'
+/app/vendor/bundle/ruby/2.0.0/gems/activerecord-4.2.1/lib/active_record/callbacks.rb:302:in `block in create_or_update'
+/app/vendor/bundle/ruby/2.0.0/gems/activesupport-4.2.1/lib/active_support/callbacks.rb:117:in `call'
+/app/vendor/bundle/ruby/2.0.0/gems/activesupport-4.2.1/lib/active_support/callbacks.rb:117:in `call'
+/app/vendor/bundle/ruby/2.0.0/gems/activesupport-4.2.1/lib/active_support/callbacks.rb:555:in `block (2 levels) in compile'
+/app/vendor/bundle/ruby/2.0.0/gems/activesupport-4.2.1/lib/active_support/callbacks.rb:505:in `call'
+/app/vendor/bundle/ruby/2.0.0/gems/activesupport-4.2.1/lib/active_support/callbacks.rb:505:in `call'
+/app/vendor/bundle/ruby/2.0.0/gems/activesupport-4.2.1/lib/active_support/callbacks.rb:92:in `_run_callbacks'
+/app/vendor/bundle/ruby/2.0.0/gems/activesupport-4.2.1/lib/active_support/callbacks.rb:776:in `_run_save_callbacks'
+/app/vendor/bundle/ruby/2.0.0/gems/activerecord-4.2.1/lib/active_record/callbacks.rb:302:in `create_or_update'
+/app/vendor/bundle/ruby/2.0.0/gems/activerecord-4.2.1/lib/active_record/persistence.rb:142:in `save!'
+/app/vendor/bundle/ruby/2.0.0/gems/activerecord-4.2.1/lib/active_record/validations.rb:43:in `save!'
+/app/vendor/bundle/ruby/2.0.0/gems/activerecord-4.2.1/lib/active_record/attribute_methods/dirty.rb:29:in `save!'
+/app/vendor/bundle/ruby/2.0.0/gems/activerecord-4.2.1/lib/active_record/transactions.rb:291:in `block in save!'
+/app/vendor/bundle/ruby/2.0.0/gems/activerecord-4.2.1/lib/active_record/transactions.rb:347:in `block in with_transaction_returning_status'
+/app/vendor/bundle/ruby/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/abstract/database_statements.rb:213:in `block in transaction'
+/app/vendor/bundle/ruby/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/abstract/transaction.rb:188:in `within_new_transaction'
+/app/vendor/bundle/ruby/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/abstract/database_statements.rb:213:in `transaction'
+/app/vendor/bundle/ruby/2.0.0/gems/activerecord-4.2.1/lib/active_record/transactions.rb:220:in `transaction'
+/app/vendor/bundle/ruby/2.0.0/gems/activerecord-4.2.1/lib/active_record/transactions.rb:344:in `with_transaction_returning_status'
+/app/vendor/bundle/ruby/2.0.0/gems/activerecord-4.2.1/lib/active_record/transactions.rb:291:in `save!'
+/app/vendor/bundle/ruby/2.0.0/gems/activerecord-4.2.1/lib/active_record/persistence.rb:51:in `create!'
+/app/db/seeds.rb:12:in `block in <top (required)>'
+/app/db/seeds.rb:11:in `times'
+/app/db/seeds.rb:11:in `<top (required)>'
+/app/vendor/bundle/ruby/2.0.0/gems/activesupport-4.2.1/lib/active_support/dependencies.rb:268:in `load'
+/app/vendor/bundle/ruby/2.0.0/gems/activesupport-4.2.1/lib/active_support/dependencies.rb:268:in `block in load'
+/app/vendor/bundle/ruby/2.0.0/gems/activesupport-4.2.1/lib/active_support/dependencies.rb:240:in `load_dependency'
+/app/vendor/bundle/ruby/2.0.0/gems/activesupport-4.2.1/lib/active_support/dependencies.rb:268:in `load'
+/app/vendor/bundle/ruby/2.0.0/gems/railties-4.2.1/lib/rails/engine.rb:547:in `load_seed'
+/app/vendor/bundle/ruby/2.0.0/gems/activerecord-4.2.1/lib/active_record/tasks/database_tasks.rb:250:in `load_seed'
+/app/vendor/bundle/ruby/2.0.0/gems/activerecord-4.2.1/lib/active_record/railties/databases.rake:180:in `block (2 levels) in <top (required)>'
+/app/vendor/bundle/ruby/2.0.0/gems/activerecord-4.2.1/lib/active_record/railties/databases.rake:139:in `block (2 levels) in <top (required)>'
+Tasks: TOP => db:setup => db:seed
+(See full trace by running task with --trace)
