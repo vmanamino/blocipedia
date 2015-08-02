@@ -76,4 +76,7 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+  
+  # host to link to
+  config.action_mailer.default_url_options = {host: 'viral-blocipedia.herokuapp.com'}
 end
