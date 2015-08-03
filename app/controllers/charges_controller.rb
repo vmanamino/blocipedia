@@ -7,7 +7,7 @@ class ChargesController < ApplicationController
     amount: amount.default
    }
   end
-  
+
   def create
     amount = Amount.new
     customer = Stripe::Customer.create(
@@ -23,9 +23,9 @@ class ChargesController < ApplicationController
     user = current_user
     user.role = 'premium'
     user.save
-    flash[:success] = 'Thanks for all the money, #{current_user.email}.  Pay me some more!'
+    flash[:notice] = "Thanks for all the money, #{current_user.email}.  Pay me some more!"
     redirect_to root_path
-    
+
     # Error handling
   rescue Stripe::CardError => e
     flash[:error] = e.message
