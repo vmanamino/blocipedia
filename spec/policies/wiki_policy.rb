@@ -16,7 +16,21 @@ describe WikiPolicy do
     end
   end
   permissions :show? do
-    it_behaves_like 'application_policy_show'
+    before do
+      @private_wiki = create(:wiki, private: true)
+    end
+    it 'permits view to premium user' do
+      user = create(:user, role: 'premium')
+      expect(subject).to permit(user, @private_wiki)
+    end
+    it 'permits view to admin user' do
+      user = create(:user, role: 'admin')
+      expect(subject).to permit(user, @private_wiki)
+    end
+    it 'denies view to standard user' do
+      user = create(:user, role: 'standard')
+      expect(subject).not_to permit(user, @private_wiki)
+    end
   end
   permissions :create? do
     it_behaves_like 'application_policy_create'
