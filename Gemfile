@@ -76,3 +76,5 @@ gem 'friendly_id', '~> 5.1.0'
 gem 'pundit'
 # test code coverage
 gem 'simplecov', require: false, group: :test
+# stripe to handle payments
+gem 'stripe'
