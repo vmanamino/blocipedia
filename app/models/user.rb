@@ -18,6 +18,8 @@ class User < ActiveRecord::Base
     role == 'premium'
   end
 
+  private
+
   def defaults
     self.role ||= 'standard'
   end
