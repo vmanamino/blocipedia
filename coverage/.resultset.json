@@ -1,22 +1,69 @@
 {
   "RSpec": {
     "coverage": {
-      "/home/action/code/blocipedia/app/models/wiki.rb": [
+      "/home/action/code/blocipedia/app/controllers/charges_controller.rb": [
         1,
         1,
+        0,
+        0,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        1,
+        0,
+        0,
+        null,
+        null,
+        null,
+        0,
+        null,
+        null,
+        null,
+        null,
+        null,
+        0,
+        0,
+        0,
+        0,
+        0,
+        null,
+        null,
+        null,
+        0,
+        0,
+        null,
+        null
+      ],
+      "/home/action/code/blocipedia/app/controllers/application_controller.rb": [
+        1,
+        null,
         null,
         1,
         1,
         1,
         null,
+        1,
+        0,
         null,
-        4,
         null,
         1,
+        null,
         1,
+        0,
+        null,
+        null
+      ],
+      "/home/action/code/blocipedia/app/models/amount.rb": [
+        1,
+        1,
+        0,
+        null,
         null
       ]
     },
-    "timestamp": 1438702025
+    "timestamp": 1438752211
   }
 }
