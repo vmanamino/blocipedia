@@ -22,7 +22,7 @@ class ChargesController < ApplicationController
       )
     user = current_user
     user.role = 'premium'
-    user.save
+    user.save!
     flash[:notice] = "Thanks for all the money, #{current_user.email}.  Pay me some more!"
     redirect_to root_path
 
