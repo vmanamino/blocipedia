@@ -20,9 +20,9 @@ class ChargesController < ApplicationController
       description: "BigMoney membership #{current_user.email}",
       currency: 'usd'
       )
-    user = current_user
-    user.role = 'premium'
-    user.save!
+    # user = current_user
+    current_user.role = 'premium'
+    current_user.save
     flash[:notice] = "Thanks for all the money, #{current_user.email}.  Pay me some more!"
     redirect_to root_path
 
