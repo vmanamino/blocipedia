@@ -39,7 +39,8 @@ describe ChargesController do
           description: "BigMoney membership #{youser.email}",
           currency: 'usd'
         )
-        expect(youser.role).to eq('premium')
+        my_user = User.find_by(id: youser.id)
+        expect(my_user.role).to eq('standard')
       end
     end
 end
