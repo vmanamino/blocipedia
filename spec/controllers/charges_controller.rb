@@ -22,32 +22,24 @@ describe ChargesController do
       after { StripeMock.stop }
       it 'creates message on successful payment' do
         post :create
-        customer = Stripe::Customer.create({
-          email: @user.email,
-          card: stripe_helper.generate_card_token
-        })
-        charge = Stripe::Charge.create(
-          customer: customer.id,
-          amount: amount.default,
-          description: "BigMoney membership #{@user.email}",
-          currency: 'usd'
-        )
         expect(flash[:notice]).to eq("Thanks for all the money, #{@user.email}.  Pay me some more!")
       end
       it 'upgrades the user\'s role/account to premium' do
-        user = create(:user)
+#         user = create(:user, role: 'standard')
+#         sign_in user
+        youser = @user
         post :create
         customer = Stripe::Customer.create({
-          email: user.email,
+          email: youser.email,
           card: stripe_helper.generate_card_token
         })
         charge = Stripe::Charge.create(
           customer: customer.id,
           amount: amount.default,
-          description: "BigMoney membership #{user.email}",
+          description: "BigMoney membership #{youser.email}",
           currency: 'usd'
         )
-        expect(user.role).to eq('premium')
+        expect(youser.role).to eq('premium')
       end
     end
 end
