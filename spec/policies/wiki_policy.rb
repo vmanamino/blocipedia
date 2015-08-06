@@ -28,7 +28,6 @@ describe WikiPolicy do
       expect(subject).to permit(user, @private_wiki)
     end
     it 'denies view to standard user' do
-      user = create(:user, role: 'standard')
       expect(subject).not_to permit(user, @private_wiki)
     end
   end
