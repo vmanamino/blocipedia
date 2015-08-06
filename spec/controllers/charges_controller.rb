@@ -34,7 +34,8 @@ describe ChargesController do
         )
         expect(flash[:notice]).to eq("Thanks for all the money, #{@user.email}.  Pay me some more!")
       end
-      it 'upgrades the user\'s role/account to premium' do        
+      it 'upgrades the user\'s role/account to premium' do
+        user = create(:user)
         post :create
         customer = Stripe::Customer.create({
           email: user.email,
