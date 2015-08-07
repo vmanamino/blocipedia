@@ -2,6 +2,7 @@ class WikiPolicy < ApplicationPolicy
   def index?
     true
   end
+
   def show?
     user.present? && (user.premium? || user.admin?)
   end

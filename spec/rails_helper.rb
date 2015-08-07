@@ -53,6 +53,12 @@ RSpec.configure do |config|
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
 
+  # live testing of Stripe
+  if config.filter_manager.inclusions.rules.include?(:live)
+    StripeMock.toggle_live(true)
+    puts 'Live tests against Stripe...'
+  end
+
   # enable factory_girl_rails methods in tests
   config.include FactoryGirl::Syntax::Methods
 end

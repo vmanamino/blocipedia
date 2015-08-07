@@ -8,7 +8,7 @@ class WikisController < ApplicationController
 
   def show
     @wiki = Wiki.friendly.find(params[:id])
-    unless request.path == wiki_path(@wiki) # rubocop:disable Style/GuardClause
+    unless request.path == wiki_path(@wiki)
       redirect_to @wiki, status: :moved_permanently
     end
     authorize @wiki
