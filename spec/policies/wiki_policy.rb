@@ -30,7 +30,7 @@ describe WikiPolicy do
 #     end
 #     it 'denies view to standard user' do
 #       expect(subject).not_to permit(user, @private_wiki)
-#     end
+    #     end # rubocop:disable Style/CommentIndentation
   end
   permissions :create? do
     it_behaves_like 'application_policy_create'

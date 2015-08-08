@@ -14,7 +14,7 @@ class ChargesController < ApplicationController
       email: current_user.email,
       card: params[:stripeToken]
     )
-    @charge = Stripe::Charge.create( # rubocop:disable Lint/UselessAssignment
+    @charge = Stripe::Charge.create(
       customer: @customer.id,
       amount: amount.default,
       description: "BigMoney membership #{current_user.email}",
