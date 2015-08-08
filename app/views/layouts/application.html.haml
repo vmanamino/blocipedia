@@ -11,7 +11,9 @@
       %ul.nav.nav-tabs
         %li= link_to "Home", root_path
         %li= link_to "About", root_path
-       
+        - if current_user
+          %li= link_to 'Wikis', wikis_path
+
         .pull-right.user-info
           - if current_user
             Hello
