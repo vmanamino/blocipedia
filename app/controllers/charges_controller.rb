@@ -10,17 +10,17 @@ class ChargesController < ApplicationController
 
   def create # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
     amount = Amount.new
-    customer = Stripe::Customer.create(
+    @customer = Stripe::Customer.create(
       email: current_user.email,
       card: params[:stripeToken]
     )
-    charge = Stripe::Charge.create( # rubocop:disable Lint/UselessAssignment
-      customer: customer.id,
+    @charge = Stripe::Charge.create( # rubocop:disable Lint/UselessAssignment
+      customer: @customer.id,
       amount: amount.default,
       description: "BigMoney membership #{current_user.email}",
       currency: 'usd'
     )
-    current_user.update_attributes(role: 'premium')
+    current_user.update_attributes(role: 'premium') unless current_user.role == 'premium'
     flash[:notice] = "Thanks for all the money, #{current_user.email}.  Pay me some more!"
     redirect_to root_path
 

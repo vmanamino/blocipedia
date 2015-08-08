@@ -23,95 +23,40 @@ describe ChargesController do
       expect(flash[:notice]).to eq("Thanks for all the money, #{@user.email}.  Pay me some more!")
     end
     it 'upgrades the user\'s role/account to premium' do
+      expect(@user.role).to eq('standard')
       post :create
-      customer = Stripe::Customer.create(
-        email: @user.email,
-        card: stripe_helper.generate_card_token
-      )
-      charge = Stripe::Charge.create( # rubocop:disable Lint/UselessAssignment
-        customer: customer.id,
-        amount: amount.default,
-        description: "BigMoney membership #{@user.email}",
-        currency: 'usd'
-      )
-      my_user = User.find_by(id: @user.id)
-      expect(my_user.role).to eq('premium')
+      @user.reload
+      expect(@user.role).to eq('premium')
     end
     it 'charges standard user 200 pennies' do
       post :create
-      customer = Stripe::Customer.create(
-        email: @user.email,
-        card: stripe_helper.generate_card_token
-      )
-      charge = Stripe::Charge.create(
-        customer: customer.id,
-        amount: amount.default,
-        description: "BigMoney membership #{@user.email}",
-        currency: 'usd'
-      )
+      charge = assigns(:charge)
       expect(charge.amount).to eq(200)
     end
     it 'successfully charges standard user\'s account' do
       post :create
-      customer = Stripe::Customer.create(
-        email: @user.email,
-        card: stripe_helper.generate_card_token
-      )
-      charge = Stripe::Charge.create(
-        customer: customer.id,
-        amount: amount.default,
-        description: "BigMoney membership #{@user.email}",
-        currency: 'usd'
-      )
+      charge = assigns(:charge)
       expect(charge.status).to eq('succeeded')
     end
     it 'keeps premium user\'s role at premium on additional payment' do
       user = create(:user, role: 'premium')
       sign_in user
       post :create
-      customer = Stripe::Customer.create(
-        email: user.email,
-        card: stripe_helper.generate_card_token
-      )
-      charge = Stripe::Charge.create( # rubocop:disable Lint/UselessAssignment
-        customer: customer.id,
-        amount: amount.default,
-        description: "BigMoney membership #{user.email}",
-        currency: 'usd'
-      )
-      my_user = User.find_by(id: user.id)
-      expect(my_user.role).to eq('premium')
+      user.reload
+      expect(user.role).to eq('premium')
     end
     it 'charges a premium user 200 pennies' do
       user = create(:user, role: 'premium')
       sign_in user
       post :create
-      customer = Stripe::Customer.create(
-        email: user.email,
-        card: stripe_helper.generate_card_token
-      )
-      charge = Stripe::Charge.create(
-        customer: customer.id,
-        amount: amount.default,
-        description: "BigMoney membership #{user.email}",
-        currency: 'usd'
-      )
+      charge = assigns(:charge)
       expect(charge.amount).to eq(200)
     end
     it 'successfully charges premium user\'s account' do
       user = create(:user, role: 'premium')
       sign_in user
       post :create
-      customer = Stripe::Customer.create(
-        email: user.email,
-        card: stripe_helper.generate_card_token
-      )
-      charge = Stripe::Charge.create(
-        customer: customer.id,
-        amount: amount.default,
-        description: "BigMoney membership #{user.email}",
-        currency: 'usd'
-      )
+      charge = assigns(:charge)
       expect(charge.status).to eq('succeeded')
     end
   end
