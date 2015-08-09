@@ -12,9 +12,15 @@
         %li= link_to "Home", root_path
         %li= link_to "About", root_path
         %li= link_to 'Wikis', wikis_path
-
+        - if current_user.role == 'premium'
+          %li= link_to 'Downgrade your wikis', user_path(current_user)
+        - else
+          %li= link_to 'Upgrade to Premium', new_charge_path
         .pull-right.user-info
           - if current_user
+            = link_to (current_user.email || current_user.name), edit_user_registration_path
+            = link_to edit_user_registration_path, class: 'btn btn-primary btn-sm' do
+              %span.glyphicon.glyphicon-user
             Hello
             = current_user.email
             /!

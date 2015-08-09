@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
   has_many :wikis
   after_initialize :defaults, if: :new_record?
+  after_update :downgrade_status
 
   def admin?
     role == 'admin'
@@ -22,5 +23,9 @@ class User < ActiveRecord::Base
 
   def defaults
     self.role ||= 'standard'
+  end
+  
+  def downgrade_status
+    
   end
 end
