@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  
+
   get 'users/show'
 
   resources :charges, only: [:new, :create]
@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   resources :wikis
 
   devise_for :users
-  resources :users, only: [:show, :update]
+  resources :users, only: [:update, :show]
   get 'about' => 'welcome#about'
 
   root to: 'welcome#index'

@@ -23,4 +23,15 @@ describe User do
   it 'has public method standard with boolean values' do
     expect(@user.standard?).to eq(true) # this is the default role via callback
   end
+  describe 'downgrade_status method' do
+    before do
+      @wikis = create_list(:wiki, 5, user: @user, private: true)
+    end
+    it 'changes all private wikis to public' do
+      expect(Wiki.where(private: true).count).to eq(5)
+      @user.send(:downgrade_status)
+      expect(Wiki.where(private: false).count).to eq(5)
+      expect(Wiki.count).to eq(5)
+    end
+  end
 end

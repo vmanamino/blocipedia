@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
   has_many :wikis
+  validates :role, presence: true
   after_initialize :defaults, if: :new_record?
   after_update :downgrade_status
 
@@ -26,6 +27,6 @@ class User < ActiveRecord::Base
   end
   
   def downgrade_status
-    
+    self.wikis.update_all private: false
   end
 end

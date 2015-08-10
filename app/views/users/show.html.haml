@@ -1,0 +1,13 @@
+= @user.name
+= @user.role
+- @wikis_private.each do |wiki|
+  .media
+    .media-body
+      .media-heading
+        %p= link_to wiki.title, wiki
+- @wikis_public.each do |wiki|
+  .media
+    .media-body
+      .media-heading
+        %p= link_to wiki.title, wiki
+
