@@ -7,10 +7,8 @@ describe User do
   it 'has working test factory' do
     expect(@user).to be_valid
   end
-  it 'has many wikis' do
-    reflection = User.reflect_on_association(:wikis)
-    expect(reflection.macro).to eq(:has_many)
-  end
+  it { should have_many(:wikis) }
+  it { should validate_presence_of(:role) }
   it 'has default role standard' do # testing private callback for default value
     expect(@user.role).to eq('standard')
   end

@@ -33,10 +33,10 @@ describe UsersController do
       @current_user.reload
       expect(@current_user.role).to eq('standard')
     end
-    it 'redirects to current user show view on successful update' do
-      patch :update, id: @current_user.id, user: { role: 'standard' }
-      expect(response).to redirect_to(@current_user)
-    end
+
+    before { patch :update, id: @current_user.id, user: { role: 'standard' } }
+    it { should redirect_to(@current_user) }
+
     it 'generates flash notice on updating' do
       patch :update, id: @current_user.id, user: { role: 'standard' }
       expect(flash[:notice]).to eq('Your account was downgraded')
@@ -45,10 +45,11 @@ describe UsersController do
       patch :update, id: @current_user.id, user: { role: '' }
       expect(flash[:error]).to eq('Your account failed to downgrade')
     end
-    it 'redirects to curent user show view on failed update ' do
-      patch :update, id: @current_user.id, user: { role: '' }
-      expect(response).to redirect_to(@current_user)
-    end
+
+    # failed update
+    before { patch :update, id: @current_user.id, user: { role: '' } }
+    it { should redirect_to(@current_user)}
+
     describe 'user model callback to downgrade status on update' do
       before do
         @wikis = create_list(:wiki, 5, user: @current_user, private: true)

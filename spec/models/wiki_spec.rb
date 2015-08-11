@@ -15,10 +15,8 @@ describe Wiki do
     @wiki = create(:wiki)
     expect(@wiki).to be_valid
   end
-  it 'belongs to a user' do
-    reflection = Wiki.reflect_on_association(:user)
-    expect(reflection.macro).to eq(:belongs_to)
-  end
+  it { should belong_to(:user) }
+
   it 'default value of private is false' do
     @wiki = create(:wiki)
     expect(@wiki.private).to be(false)
@@ -37,4 +35,5 @@ describe Wiki do
     public_wikis = wikis.where(private: false)
     expect(public_wikis.count).to eq(5)
   end
+
 end

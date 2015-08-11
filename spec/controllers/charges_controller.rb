@@ -8,10 +8,8 @@ describe ChargesController do
     sign_in @user
   end
   describe '#new action' do
-    it 'renders a new template' do
-      get :new
-      expect(response).to render_template('new')
-    end
+    before { get :new }
+    it { should render_template('new') }
   end
   describe '#create' do
     let(:stripe_helper) { StripeMock.create_test_helper }
@@ -59,5 +57,7 @@ describe ChargesController do
       charge = assigns(:charge)
       expect(charge.status).to eq('succeeded')
     end
+    before { post :create }
+    it { should redirect_to(root_path)}
   end
 end

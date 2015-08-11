@@ -35,10 +35,8 @@ describe WikisController do
   end
 
   describe '#new' do
-    it 'renders a new template' do
-      get :new
-      expect(response).to render_template('new')
-    end
+    before { get :new }
+    it { should render_template('new') }
     it 'instantiates a new empty wiki' do
       get :new
       wiki = assigns(:wiki)
@@ -52,11 +50,10 @@ describe WikisController do
       expect(wiki.user).to eq(@user)
       expect(flash[:notice]).to eq('Your wiki was saved')
     end
-    it 'redirects to newly created wiki' do
-      post :create, wiki: { title: 'my wiki', body: 'this is my body, how great' }
-      wiki_path = assigns(:wiki)
-      expect(response).to redirect_to(wiki_path)
-    end
+
+    before { post :create, wiki: { title: 'my wiki', body: 'this is my body, how great' } }
+    it { should redirect_to(assigns(:wiki)) }
+
     it 'fails to save wiki with [invalid] title too short' do
       post :create, wiki: { title: 'my', body: 'this is my body, how great' }
       expect(flash[:error]).to eq('Your wiki failed to save')
@@ -69,7 +66,7 @@ describe WikisController do
       post :create, wiki: { title: 'my wiki', body: 'this is my body' }
       expect(flash[:error]).to eq('Your wiki failed to save')
     end
-    it 'redirects to new template on failed save of wiki title too short' do
+    it 'renders new template on failed save of wiki title too short' do
       post :create, wiki: { title: 'my', body: 'this is my body, how great' }
       expect(response).to render_template('new')
     end
@@ -96,10 +93,8 @@ describe WikisController do
     before do
       @wiki = create(:wiki)
     end
-    it 'renders a template' do
-      get :edit, id: @wiki.id
-      expect(response).to render_template('edit')
-    end
+    before { get :edit, id: create(:wiki) }
+    it { should render_template('edit') }
     it 'gets the correct wiki to update' do
       get :edit, id: @wiki.id
       expect(assigns(:wiki)).to eq(@wiki)
