@@ -35,5 +35,4 @@ describe Wiki do
     public_wikis = wikis.where(private: false)
     expect(public_wikis.count).to eq(5)
   end
-
 end

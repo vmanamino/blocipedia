@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-before_action :authenticate_user!
+  before_action :authenticate_user!
 
   def show
     @user = current_user
@@ -8,7 +8,7 @@ before_action :authenticate_user!
     @wikis_public = wikis.where(private: false).all
   end
 
-  def update
+  def update # rubocop:disable Metrics/AbcSize
     if current_user.update_attributes(params.require(:user).permit(:role))
       flash[:notice] = 'Your account was downgraded'
       redirect_to user_path(current_user)

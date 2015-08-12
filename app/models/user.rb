@@ -25,8 +25,8 @@ class User < ActiveRecord::Base
   def defaults
     self.role ||= 'standard'
   end
-  
+
   def downgrade_status
-    self.wikis.update_all private: false
+    wikis.update_all private: false
   end
 end

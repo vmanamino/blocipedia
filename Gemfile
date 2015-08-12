@@ -16,7 +16,7 @@ group :test do
   gem 'rspec-rails', '~> 3.0'
   gem 'capybara', '~> 2.3.0'
   gem 'stripe-ruby-mock', '~> 2.1.1', require: 'stripe_mock'
-  gem 'shoulda-matchers', '~> 3.0.0.alpha' 
+  gem 'shoulda-matchers', '~> 3.0.0.alpha'
 end
 
 # Use SCSS for stylesheets

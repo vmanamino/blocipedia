@@ -63,13 +63,10 @@ RSpec.configure do |config|
   # enable factory_girl_rails methods in tests
   config.include FactoryGirl::Syntax::Methods
 
-  Shoulda::Matchers.configure do |config|
-  config.integrate do |with|
-    with.test_framework :rspec
-    with.library :rails
+  Shoulda::Matchers.configure do |con|
+    con.integrate do |with|
+      with.test_framework :rspec
+      with.library :rails
+    end
   end
 end
-end
-
-
-

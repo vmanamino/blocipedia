@@ -48,7 +48,7 @@ describe UsersController do
 
     # failed update
     before { patch :update, id: @current_user.id, user: { role: '' } }
-    it { should redirect_to(@current_user)}
+    it { should redirect_to(@current_user) }
 
     describe 'user model callback to downgrade status on update' do
       before do

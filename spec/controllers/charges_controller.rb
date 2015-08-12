@@ -58,6 +58,6 @@ describe ChargesController do
       expect(charge.status).to eq('succeeded')
     end
     before { post :create }
-    it { should redirect_to(root_path)}
+    it { should redirect_to(root_path) }
   end
 end
