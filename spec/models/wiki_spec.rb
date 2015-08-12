@@ -35,4 +35,9 @@ describe Wiki do
     public_wikis = wikis.where(private: false)
     expect(public_wikis.count).to eq(5)
   end
+  it 'scope returns all private and public wikis of another user to admin' do
+    admin = create(:user, role: 'admin')
+    wikis = Wiki.visible_to(admin)
+    expect(wikis.count).to be(7)
+  end
 end

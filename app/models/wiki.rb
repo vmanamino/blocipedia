@@ -5,8 +5,15 @@ class Wiki < ActiveRecord::Base
   validates :body, length: { minimum: 20 }, presence: true
   validates :user, presence: true
 
-  # scope :visible_to, -> (user) { user.role == 'premium' ? all : where(private: false) }
-  scope :visible_to, -> (user) { user ? where('user_id=? OR private=?', user.id, false) : where(private: false) } # rubocop:disable Metrics/LineLength
+  def self.visible_to(user)
+    if user.admin?
+      Wiki.all
+    elsif user
+      Wiki.where('user_id=? OR private=?', user.id, false)
+    else
+      Wiki.where(private: false)
+    end
+  end
 
   extend FriendlyId
   friendly_id :title, use: [:slugged, :history]
