@@ -6,10 +6,12 @@ class Wiki < ActiveRecord::Base
   validates :user, presence: true
 
   def self.visible_to(user)
-    if user.admin?
-      Wiki.all
-    elsif user
-      Wiki.where('user_id=? OR private=?', user.id, false)
+    if user
+      if user.admin?
+        Wiki.all
+      else
+        Wiki.where('user_id=? OR private=?', user.id, false)
+      end
     else
       Wiki.where(private: false)
     end
