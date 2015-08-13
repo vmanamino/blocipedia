@@ -1,13 +1,9 @@
 Rails.application.routes.draw do
 
-  get 'users/show'
-
-  resources :charges, only: [:new, :create]
-
-  resources :wikis
-
   devise_for :users
   resources :users, only: [:update, :show]
+  resources :wikis
+  resources :charges, only: [:new, :create]
   get 'about' => 'welcome#about'
 
   root to: 'welcome#index'

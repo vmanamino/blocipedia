@@ -50,7 +50,7 @@ describe UsersController do
     before { patch :update, id: @current_user.id, user: { role: '' } }
     it { should redirect_to(@current_user) }
 
-    describe 'user model callback to downgrade status on update' do
+    describe 'user model method to downgrade status on update' do
       before do
         @wikis = create_list(:wiki, 5, user: @current_user, private: true)
       end

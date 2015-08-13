@@ -7,7 +7,7 @@ class Wiki < ActiveRecord::Base
 
   def self.visible_to(user)
     if user
-      if user.admin?
+      if user.role == 'admin'
         Wiki.all
       else
         Wiki.where('user_id=? OR private=?', user.id, false)

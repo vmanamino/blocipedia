@@ -11,6 +11,7 @@ class UsersController < ApplicationController
   def update # rubocop:disable Metrics/AbcSize
     if current_user.update_attributes(params.require(:user).permit(:role))
       flash[:notice] = 'Your account was downgraded'
+      #current_user.downgrade_status
       redirect_to user_path(current_user)
     else
       flash[:error] = 'Your account failed to downgrade'
