@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   has_many :wikis
   validates :role, presence: true
   after_initialize :defaults, if: :new_record?
-  # after_update :downgrade_status
+  after_update :downgrade_status
 
   def admin?
     role == 'admin'
@@ -27,6 +27,6 @@ class User < ActiveRecord::Base
   end
 
   def downgrade_status
-    wikis.update_all private: false
+    wikis.update_all private: false unless self.premium?
   end
 end
