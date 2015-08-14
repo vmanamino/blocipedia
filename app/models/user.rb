@@ -28,8 +28,7 @@ class User < ActiveRecord::Base
   end
 
   def downgrade_status
-    if self.role_changed?(from: 'premium', to: 'standard')
-      wikis.update_all private: false
-    end
+    return unless self.role_changed?(from: 'premium', to: 'standard')
+    wikis.update_all private: false
   end
 end
