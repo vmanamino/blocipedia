@@ -8,7 +8,7 @@
   - if current_user.role == 'admin' || (current_user.role == 'premium' && wiki.user_id == current_user.id)
     .form-group
       = f.label :private, class: 'checkbox' do
-        = f.check_box :private 
+        = f.check_box :private
         Private
   .form-group
     = f.submit 'Save', class: 'btn btn-success'
