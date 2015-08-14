@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  include ActiveModel::Dirty
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -27,6 +28,8 @@ class User < ActiveRecord::Base
   end
 
   def downgrade_status
-    wikis.update_all private: false unless self.premium?
+    if self.role_changed?(from: 'premium', to: 'standard')
+      wikis.update_all private: false
+    end
   end
 end

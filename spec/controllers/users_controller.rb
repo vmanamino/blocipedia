@@ -28,7 +28,7 @@ describe UsersController do
     end
   end
   describe 'update action' do
-    it 'updates/downgrades premium user to standard' do
+    it 'downgrades premium user to standard' do
       patch :update, id: @current_user.id, user: { role: 'standard' }
       @current_user.reload
       expect(@current_user.role).to eq('standard')
@@ -45,29 +45,30 @@ describe UsersController do
       patch :update, id: @current_user.id, user: { role: '' }
       expect(flash[:error]).to eq('Your account failed to downgrade')
     end
-
     # failed update
     before { patch :update, id: @current_user.id, user: { role: '' } }
     it { should redirect_to(@current_user) }
-
-    describe 'user model method to downgrade status on update' do
-      before do
-        @wikis = create_list(:wiki, 5, user: @current_user, private: true)
-      end
-      it 'keeps private value if user role stays premium ' do
-        wikis = Wiki.where(user: @current_user)
-        expect(wikis.where(private: true).count).to eq(5)
-        patch :update, id: @current_user.id, user: { role: 'premium' }
-        wikis = Wiki.where(user: @current_user)
-        expect(wikis.where(private: false).count).to eq(0)
-      end
-      it 'all associated wikis made public only if user is updated to standard ' do
-        wikis = Wiki.where(user: @current_user)
-        expect(wikis.where(private: true).count).to eq(5)
-        patch :update, id: @current_user.id, user: { role: 'standard' }
-        wikis = Wiki.where(user: @current_user)
-        expect(wikis.where(private: false).count).to eq(5)
-      end
+  end
+  describe 'calls after_update model method' do
+    before do
+      @change_user = create(:user, role: 'premium')
+      sign_in @change_user
+      @wikis = create_list(:wiki, 5, user: @change_user, private: true)
+    end
+    it 'keeps private value if user role stays premium ' do
+      wikis = Wiki.where(user: @change_user)
+      expect(wikis.where(private: true).count).to eq(5)
+      patch :update, id: @change_user.id, user: { role: 'premium' }
+      wikis = Wiki.where(user: @change_user)
+      expect(wikis.where(private: false).count).to eq(0)
+    end
+    it 'makes all associated wikis public only if user is updated to standard ' do
+      wikis = Wiki.where(user: @change_user)
+      expect(wikis.where(private: true).count).to eq(5)
+      patch :update, id: @change_user.id, user: { role: 'standard' }
+      wikis = Wiki.where(user: @change_user)
+      expect(wikis.where(user: @change_user, private: false).count).to eq(5)
     end
   end
 end
+
