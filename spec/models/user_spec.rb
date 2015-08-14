@@ -31,46 +31,46 @@ describe User do
       expect(Wiki.where(user: @user, private: false).count).to eq(0)
       expect(Wiki.count).to eq(5)
     end
-    describe 'when Standard User' do
+    context 'when Standard User' do
       before do
         @user_standard = create(:user) # default role is standard
         @user_standard_wikis = create_list(:wiki, 5, user: @user_standard, private: true)
       end
-      it 'wikis stay private if attribute other than role is changed' do
+      it 'wikis private value stay the same if attribute other than role is changed' do
         expect(Wiki.where(user: @user_standard, private: true).count).to eq(5)
         @user_standard.name = 'New Name'
         @user_standard.save
         expect(Wiki.where(user: @user_standard, private: true).count).to eq(5)
       end
-      it 'wikis stay private if role is upgraded to premium' do
+      it 'wikis private value stay the same if role is upgraded to premium' do
         expect(Wiki.where(user: @user_standard, private: true).count).to eq(5)
         @user_standard.role = 'premium'
         @user_standard.save
         expect(Wiki.where(user: @user_standard, private: true).count).to eq(5)
       end
-      it 'wikis stay the same if role is changed to admin' do
+      it 'wikis private value stay the same if role is changed to admin' do
         expect(Wiki.where(user: @user_standard, private: true).count).to eq(5)
         @user_standard.role = 'admin'
         @user_standard.save
         expect(Wiki.where(user: @user_standard, private: true).count).to eq(5)
       end
     end
-    describe 'when Premium User' do
+    context 'when Premium User' do
       before do
         @user_premium = create(:user, role: 'premium')
         @private_wikis = create_list(:wiki, 5, user: @user_premium, private: true)
       end
-      it 'wikis stay private if attribute other than role is changed' do
+      it 'wikis private value stay the same if attribute other than role is changed' do
         @user_premium.name = 'New Name'
         @user_premium.save
         expect(Wiki.where(user: @user_premium, private: true).count).to eq(5)
       end
-      it 'wikis stay private if premium user is changed to admin user' do
+      it 'wikis private value stay the same if premium user is changed to admin user' do
         @user_premium.role = 'admin'
         @user_premium.save
         expect(Wiki.where(user: @user_premium, private: true).count).to eq(5)
       end
-      it 'wikis change to public if role is updated/downgraded to standard' do
+      it 'wikis private value changes to false if role is updated/downgraded to standard' do
         @user_premium.role = 'standard'
         @user_premium.save
         expect(Wiki.where(user: @user_premium, private: false).count).to eq(5)
