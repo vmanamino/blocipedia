@@ -61,7 +61,7 @@ describe UsersController do
         wikis = Wiki.where(user: @current_user)
         expect(wikis.where(private: false).count).to eq(0)
       end
-       it 'all associated wikis made public only if user is updated to standard ' do
+      it 'all associated wikis made public only if user is updated to standard ' do
         wikis = Wiki.where(user: @current_user)
         expect(wikis.where(private: true).count).to eq(5)
         patch :update, id: @current_user.id, user: { role: 'standard' }
@@ -71,4 +71,3 @@ describe UsersController do
     end
   end
 end
-
