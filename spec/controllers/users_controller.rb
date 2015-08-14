@@ -54,13 +54,21 @@ describe UsersController do
       before do
         @wikis = create_list(:wiki, 5, user: @current_user, private: true)
       end
-      it 'makes all associated wikis public by setting private to false' do
+      it 'keeps private value if user role stays premium ' do
         wikis = Wiki.where(user: @current_user)
         expect(wikis.where(private: true).count).to eq(5)
         patch :update, id: @current_user.id, user: { role: 'premium' }
+        wikis = Wiki.where(user: @current_user)
+        expect(wikis.where(private: false).count).to eq(0)
+      end
+       it 'all associated wikis made public only if user is updated to standard ' do
+        wikis = Wiki.where(user: @current_user)
+        expect(wikis.where(private: true).count).to eq(5)
+        patch :update, id: @current_user.id, user: { role: 'standard' }
         wikis = Wiki.where(user: @current_user)
         expect(wikis.where(private: false).count).to eq(5)
       end
     end
   end
 end
+

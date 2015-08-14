@@ -14,7 +14,7 @@
       <img src="./assets/0.10.0/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2015-08-14T03:13:58+00:00">2015-08-14T03:13:58+00:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2015-08-14T05:11:23+00:00">2015-08-14T05:11:23+00:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -25,7 +25,7 @@
      covered at
      <span class="covered_strength">
        <span class="green">
-         2.14
+         2.4
        </span>
     </span> hits/line)
   </h2>
@@ -63,11 +63,11 @@
       <tr>
         <td class="strong"><a href="#2bcd3976fb2d88668c51f67c2492ea0918f6fea0" class="src_link" title="app/controllers/users_controller.rb">app/controllers/users_controller.rb</a></td>
         <td class="green strong">100.0 %</td>
-        <td>21</td>
+        <td>20</td>
         <td>13</td>
         <td>13</td>
         <td>0</td>
-        <td>4.6</td>
+        <td>5.3</td>
       </tr>
       
       <tr>
@@ -93,7 +93,7 @@
      covered at
      <span class="covered_strength">
        <span class="green">
-         3.05
+         3.46
        </span>
     </span> hits/line)
   </h2>
@@ -131,11 +131,11 @@
       <tr>
         <td class="strong"><a href="#2bcd3976fb2d88668c51f67c2492ea0918f6fea0" class="src_link" title="app/controllers/users_controller.rb">app/controllers/users_controller.rb</a></td>
         <td class="green strong">100.0 %</td>
-        <td>21</td>
+        <td>20</td>
         <td>13</td>
         <td>13</td>
         <td>0</td>
-        <td>4.6</td>
+        <td>5.3</td>
       </tr>
       
     </tbody>
@@ -511,61 +511,55 @@
           <code class="ruby">  def update # rubocop:disable Metrics/AbcSize</code>
         </li>
       
-        <li class="covered" data-hits="16" data-linenumber="12">
-          <span class="hits">16</span>
+        <li class="covered" data-hits="19" data-linenumber="12">
+          <span class="hits">19</span>
           
           <code class="ruby">    if current_user.update_attributes(params.require(:user).permit(:role))</code>
         </li>
       
-        <li class="covered" data-hits="9" data-linenumber="13">
-          <span class="hits">9</span>
+        <li class="covered" data-hits="11" data-linenumber="13">
+          <span class="hits">11</span>
           
           <code class="ruby">      flash[:notice] = &#39;Your account was downgraded&#39;</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="14">
-          
-          
-          <code class="ruby">      #current_user.downgrade_status</code>
-        </li>
-      
-        <li class="covered" data-hits="9" data-linenumber="15">
-          <span class="hits">9</span>
+        <li class="covered" data-hits="11" data-linenumber="14">
+          <span class="hits">11</span>
           
           <code class="ruby">      redirect_to user_path(current_user)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="16">
+        <li class="never" data-hits="" data-linenumber="15">
           
           
           <code class="ruby">    else</code>
         </li>
       
-        <li class="covered" data-hits="7" data-linenumber="17">
-          <span class="hits">7</span>
+        <li class="covered" data-hits="8" data-linenumber="16">
+          <span class="hits">8</span>
           
           <code class="ruby">      flash[:error] = &#39;Your account failed to downgrade&#39;</code>
         </li>
       
-        <li class="covered" data-hits="7" data-linenumber="18">
-          <span class="hits">7</span>
+        <li class="covered" data-hits="8" data-linenumber="17">
+          <span class="hits">8</span>
           
           <code class="ruby">      redirect_to user_path(current_user)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="19">
+        <li class="never" data-hits="" data-linenumber="18">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="20">
+        <li class="never" data-hits="" data-linenumber="19">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="21">
+        <li class="never" data-hits="" data-linenumber="20">
           
           
           <code class="ruby">end</code>
