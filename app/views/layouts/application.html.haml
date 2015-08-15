@@ -11,8 +11,16 @@
       %ul.nav.nav-tabs
         %li= link_to "Home", root_path
         %li= link_to "About", root_path
+        %li= link_to 'Wikis', wikis_path
+        - if current_user && current_user.premium?
+          %li= link_to 'Downgrade your account', user_path(current_user)
+        - elsif current_user && current_user.standard?
+          %li= link_to 'Upgrade to Premium', new_charge_path
         .pull-right.user-info
           - if current_user
+            = link_to (current_user.email || current_user.name), edit_user_registration_path
+            = link_to edit_user_registration_path, class: 'btn btn-primary btn-sm' do
+              %span.glyphicon.glyphicon-user
             Hello
             = current_user.email
             /!

@@ -1,0 +1,15 @@
+= @user.name
+= link_to "Downgrade your account", user_path(@user, user: { role: 'standard'} ), method: :patch, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to downgrade?  All your wikis will be made public!'}
+%h4 Private wikis
+- @wikis_private.each do |wiki|
+  .media
+    .media-body
+      .media-heading
+        %p= link_to wiki.title, wiki
+%h4 Public wikis
+- @wikis_public.each do |wiki|
+  .media
+    .media-body
+      .media-heading
+        %p= link_to wiki.title, wiki
+

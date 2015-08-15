@@ -2,27 +2,25 @@ class ChargesController < ApplicationController
   def new
     amount = Amount.new
     @stripe_btn_data = {
-    key: "#{ Rails.configuration.stripe[:publishable_key] }",
-    description: "BigMoney Membership - #{current_user.name}",
-    amount: amount.default
-   }
+      key: "#{Rails.configuration.stripe[:publishable_key]}",
+      description: "BigMoney Membership - #{current_user.name}",
+      amount: amount.default
+    }
   end
 
-  def create
+  def create # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
     amount = Amount.new
-    customer = Stripe::Customer.create(
+    @customer = Stripe::Customer.create(
       email: current_user.email,
       card: params[:stripeToken]
-      )
-    charge = Stripe::Charge.create(
-      customer: customer.id,
+    )
+    @charge = Stripe::Charge.create(
+      customer: @customer.id,
       amount: amount.default,
       description: "BigMoney membership #{current_user.email}",
       currency: 'usd'
-      )
-    user = current_user
-    user.role = 'premium'
-    user.save
+    )
+    current_user.update_attributes(role: 'premium') unless current_user.role == 'premium'
     flash[:notice] = "Thanks for all the money, #{current_user.email}.  Pay me some more!"
     redirect_to root_path
 

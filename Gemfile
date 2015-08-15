@@ -15,6 +15,8 @@ end
 group :test do
   gem 'rspec-rails', '~> 3.0'
   gem 'capybara', '~> 2.3.0'
+  gem 'stripe-ruby-mock', '~> 2.1.1', require: 'stripe_mock'
+  gem 'shoulda-matchers', '~> 3.0.0.alpha'
 end
 
 # Use SCSS for stylesheets
@@ -78,3 +80,11 @@ gem 'pundit'
 gem 'simplecov', require: false, group: :test
 # stripe to handle payments
 gem 'stripe'
+# mock stripe to test charges controller
+# gem 'stripe-ruby-mock', '~> 2.1.1', :require => 'stripe_mock'
+
+# Bundler could not find compatible versions for gem "stripe":
+#   In Gemfile:
+#     stripe-ruby-mock (~> 2.1.1) ruby depends on
+#       stripe (= 1.20.1) ruby
+#     stripe (1.23.0)

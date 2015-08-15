@@ -7,6 +7,7 @@ require 'spec_helper'
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 require 'pundit/rspec'
+require 'shoulda/matchers'
 require 'simplecov'
 SimpleCov.start 'rails'
 puts 'required simplecov'
@@ -53,6 +54,19 @@ RSpec.configure do |config|
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
 
+  # live testing of Stripe
+  if config.filter_manager.inclusions.rules.include?(:live)
+    StripeMock.toggle_live(true)
+    puts 'Live tests against Stripe...'
+  end
+
   # enable factory_girl_rails methods in tests
   config.include FactoryGirl::Syntax::Methods
+
+  Shoulda::Matchers.configure do |con|
+    con.integrate do |with|
+      with.test_framework :rspec
+      with.library :rails
+    end
+  end
 end

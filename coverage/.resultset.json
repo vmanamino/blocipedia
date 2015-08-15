@@ -1,35 +1,29 @@
 {
   "RSpec": {
     "coverage": {
-      "/home/ilija/Dropbox/code/bloc.io/viral amin/blocipedia/app/models/amount.rb": [
+      "/home/action/code/blocipedia/app/controllers/users_controller.rb": [
         1,
         1,
+        null,
         1,
+        2,
+        2,
+        2,
+        2,
+        null,
+        null,
+        1,
+        15,
+        9,
+        9,
+        null,
+        6,
+        6,
+        null,
         null,
         null
       ],
-      "/home/ilija/Dropbox/code/bloc.io/viral amin/blocipedia/app/models/wiki.rb": [
-        1,
-        1,
-        null,
-        1,
-        1,
-        1,
-        null,
-        1,
-        1,
-        null
-      ],
-      "/home/ilija/Dropbox/code/bloc.io/viral amin/blocipedia/app/controllers/welcome_controller.rb": [
-        1,
-        1,
-        null,
-        null,
-        1,
-        null,
-        null
-      ],
-      "/home/ilija/Dropbox/code/bloc.io/viral amin/blocipedia/app/controllers/application_controller.rb": [
+      "/home/action/code/blocipedia/app/controllers/application_controller.rb": [
         1,
         null,
         null,
@@ -44,11 +38,35 @@
         1,
         null,
         1,
-        5,
+        0,
         null,
+        null
+      ],
+      "/home/action/code/blocipedia/app/models/wiki.rb": [
+        1,
+        1,
+        null,
+        1,
+        1,
+        1,
+        null,
+        1,
+        0,
+        0,
+        0,
+        null,
+        0,
+        null,
+        null,
+        0,
+        null,
+        null,
+        null,
+        1,
+        1,
         null
       ]
     },
-    "timestamp": 1438719697
+    "timestamp": 1439594931
   }
 }

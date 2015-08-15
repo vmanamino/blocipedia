@@ -6,13 +6,6 @@
       %li Bodys have to be big, at least 20 characters
       %li Nothing mean
   .col-md-8
-    = form_for @wiki do |f|
-      .form-group
-        = f.label :title
-        = f.text_field :title, class: 'form-control', placeholder: 'Enter title'
-      .form-group
-        = f.label :body
-        = f.text_area :body, rows: 8, class: 'form-control', placeholder: 'Enter your wiki post'
-      .form-group
-        = f.submit 'Save', class: 'btn btn-success'
-        
+    = render partial: 'wikis/form_new', locals: { wiki: @wiki }
+    
+

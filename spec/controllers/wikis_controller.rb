@@ -35,15 +35,17 @@ describe WikisController do
   end
 
   describe '#new' do
-    it 'renders a new template' do
-      get :new
-      expect(response).to render_template('new')
-    end
+    before { get :new }
+    it { should render_template('new') }
     it 'instantiates a new empty wiki' do
       get :new
       wiki = assigns(:wiki)
       expect(wiki.id).to be_nil
     end
+  end
+  describe '#create' do
+    before { post :create, wiki: { title: 'my wiki', body: 'this is my body, how great' } }
+    it { should redirect_to(assigns(:wiki)) }
   end
   describe '#create' do
     it 'a wiki for current user' do
@@ -52,11 +54,7 @@ describe WikisController do
       expect(wiki.user).to eq(@user)
       expect(flash[:notice]).to eq('Your wiki was saved')
     end
-    it 'redirects to newly created wiki' do
-      post :create, wiki: { title: 'my wiki', body: 'this is my body, how great' }
-      wiki_path = assigns(:wiki)
-      expect(response).to redirect_to(wiki_path)
-    end
+
     it 'fails to save wiki with [invalid] title too short' do
       post :create, wiki: { title: 'my', body: 'this is my body, how great' }
       expect(flash[:error]).to eq('Your wiki failed to save')
@@ -69,12 +67,17 @@ describe WikisController do
       post :create, wiki: { title: 'my wiki', body: 'this is my body' }
       expect(flash[:error]).to eq('Your wiki failed to save')
     end
-    it 'redirects to new template on failed save of wiki title too short' do
-      post :create, wiki: { title: 'my', body: 'this is my body, how great' }
-      expect(response).to render_template('new')
-    end
+    before { post :create, wiki: { title: 'my', body: 'this is my body, how great' } }
+    it { should render_template('new') }
   end
 
+  describe '#destroy' do
+    before do
+      @wiki = create(:wiki, user: @user)
+    end
+    before { delete :destroy, id: @wiki.id }
+    it { should redirect_to root_path }
+  end
   describe '#destroy' do
     before do
       @wiki = create(:wiki, user: @user)
@@ -85,21 +88,13 @@ describe WikisController do
       expect(Wiki.find_by(user_id: @user)).to be_nil
       expect(Wiki.count).to eq(0)
     end
-    it 'redirects to root' do
-      delete :destroy, id: @wiki.id
-      expect(flash[:notice]).to eq('Your wiki was deleted successfully.')
-      expect(response).to redirect_to root_path
-    end
   end
-
   describe '#edit' do
     before do
       @wiki = create(:wiki)
     end
-    it 'renders a template' do
-      get :edit, id: @wiki.id
-      expect(response).to render_template('edit')
-    end
+    before { get :edit, id: create(:wiki) }
+    it { should render_template('edit') }
     it 'gets the correct wiki to update' do
       get :edit, id: @wiki.id
       expect(assigns(:wiki)).to eq(@wiki)
@@ -117,18 +112,15 @@ describe WikisController do
       expect(wiki_updated.body).to eq('this is my new body, how great')
       expect(wiki_updated.private).to eq(true)
     end
-    it 'redirects to updated wiki' do
-      patch :update, id: @wiki.id, wiki: { title: 'my new wiki', body: 'this is my new body, how great', private: true }
-      wiki_updated = assigns(:wiki)
-      expect(response).to redirect_to wiki_updated
-    end
+
+    before { patch :update, id: @wiki.id, wiki: { title: 'my new wiki', body: 'this is my new body, how great', private: true } } # rubocop:disable Metrics/LineLength
+    it { should redirect_to assigns(:wiki) }
     it 'generates error on failed update: invalid title' do
       patch :update, id: @wiki.id, wiki: { title: 'my', body: 'this is my new body, how great', private: true }
       expect(flash[:error]).to eq('Your wiki failed to update')
     end
-    it 'redirects to wiki which failed to update' do
-      patch :update, id: @wiki.id, wiki: { title: 'my', body: 'this is my new body, how great', private: true }
-      expect(response).to redirect_to @wiki
-    end
+
+    before { patch :update, id: @wiki.id, wiki: { title: 'my', body: 'this is my new body, how great', private: true } }
+    it { should redirect_to assigns(:wiki) }
   end
 end

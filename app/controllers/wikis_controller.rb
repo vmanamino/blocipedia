@@ -2,13 +2,13 @@ class WikisController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
 
   def index
-    @wikis = Wiki.all
+    @wikis = Wiki.visible_to(current_user)
     authorize @wikis
   end
 
   def show
     @wiki = Wiki.friendly.find(params[:id])
-    unless request.path == wiki_path(@wiki) # rubocop:disable Style/GuardClause
+    unless request.path == wiki_path(@wiki)
       redirect_to @wiki, status: :moved_permanently
     end
     authorize @wiki
