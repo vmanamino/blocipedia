@@ -8,6 +8,7 @@ describe User do
     expect(@user).to be_valid
   end
   it { should have_many(:wikis) }
+  it { should have_many(:collaborators) }
   it { should validate_presence_of(:role) }
   it 'has default role standard' do # testing private callback for default value
     expect(@user.role).to eq('standard')
@@ -73,6 +74,7 @@ describe User do
       it 'wikis private value changes to false if role is updated/downgraded to standard' do
         @user_premium.role = 'standard'
         @user_premium.save
+        @user_premium.reload
         expect(Wiki.where(user: @user_premium, private: false).count).to eq(5)
       end
     end
