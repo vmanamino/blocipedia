@@ -6,7 +6,6 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
   has_many :wikis
-  has_many :wikis, through: :collaborators
   has_many :collaborators
 
   validates :role, presence: true
