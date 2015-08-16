@@ -1,6 +1,12 @@
 {
   "RSpec": {
     "coverage": {
+      "/home/action/code/blocipedia/app/models/collaborator.rb": [
+        1,
+        1,
+        1,
+        null
+      ],
       "/home/action/code/blocipedia/app/models/wiki.rb": [
         1,
         1,
@@ -28,6 +34,6 @@
         null
       ]
     },
-    "timestamp": 1439765007
+    "timestamp": 1439768008
   }
 }

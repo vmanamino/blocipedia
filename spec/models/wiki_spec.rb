@@ -16,6 +16,7 @@ describe Wiki do
     expect(@wiki).to be_valid
   end
   it { should belong_to(:user) }
+  it { should have_many(:users) }
 
   it 'default value of private is false' do
     @wiki = create(:wiki)
