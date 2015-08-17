@@ -24,6 +24,15 @@ class User < ActiveRecord::Base
     role == 'premium'
   end
 
+  def wikis_collaborator
+    collaboration_wikis = []
+    collaborators = Collaborator.includes(:wiki).where(user_id: self).all
+    collaborators.each do |collaborator|
+      collaboration_wikis.push(collaborator.wiki)
+    end
+    collaboration_wikis
+  end
+
   private
 
   def defaults

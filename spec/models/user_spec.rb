@@ -22,6 +22,22 @@ describe User do
   it 'has public method standard with boolean values' do
     expect(@user.standard?).to eq(true) # this is the default role via callback
   end
+  describe 'wikis_collaborator method' do
+    before do
+      @user_other = create(:user)
+      @wikis = create_list(:wiki, 5, user: @user_other)
+      @collaboration = []
+      @wikis.each do |wiki|
+        @collaboration.push(create(:collaborator, user: @user, wiki: wiki))
+      end
+    end
+    it 'returns wikis User collaborated on' do
+      expect(@user.wikis_collaborator).to eq(@wikis)
+    end
+    it 'does not return User created wikis' do
+      expect(@user.wikis.count).to be(0)
+    end
+  end
   describe 'downgrade_status method' do
     before do
       @wikis = create_list(:wiki, 5, user: @user, private: true)
@@ -75,7 +91,7 @@ describe User do
         @user_premium.role = 'standard'
         @user_premium.save
         @user_premium.reload
-        expect(Wiki.where(user: @user_premium, private: false).count).to eq(5)
+        expect(Wiki.where(user: @user_premium, private: true).count).to eq(0)
       end
     end
   end

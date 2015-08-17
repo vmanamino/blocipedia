@@ -17,12 +17,13 @@ describe Wiki do
   end
   it { should belong_to(:user) }
   it { should have_many(:users) }
+  it { should validate_presence_of(:user) }
 
   it 'default value of private is false' do
     @wiki = create(:wiki)
     expect(@wiki.private).to be(false)
   end
-  it 'scope returns private wikis that belongs to a given premium user only' do
+  it 'scope returns private wikis belonging to premium user' do
     wikis = Wiki.visible_to(@user_two)
     private_wiki = wikis.where(private: true)
     expect(private_wiki[0].user_id).to eq(@user_two.id)
@@ -31,20 +32,33 @@ describe Wiki do
     expect(private_wiki[0].user_id).not_to eq(@user_two.id)
     expect(private_wiki[0].user_id).to eq(@user.id)
   end
-  it 'scope returns all public wikis to a given premium user' do
+  it 'scope returns all public wikis to a premium user' do
     wikis = Wiki.visible_to(@user_two)
     public_wikis = wikis.where(private: false)
     expect(public_wikis.count).to eq(5)
   end
-  it 'scope returns all private and public wikis of another user to admin' do
+  it 'scope returns all private and public wikis to admin' do
     admin = create(:user, role: 'admin')
     wikis = Wiki.visible_to(admin)
     expect(wikis.count).to eq(7)
   end
-  it 'scope returns all public wikis to a standard user' do
+  it 'scope returns all public wikis to standard user' do
     josef = create(:user)
     wikis = Wiki.visible_to(josef)
     expect(wikis.count).to eq(5)
     expect(wikis.where(private: false).count).to eq(5)
+  end
+  describe 'user_collaborators method' do
+    before do
+      @wiki_collaboration = create(:wiki)
+      @users = create_list(:user, 5)
+      @collaboration = []
+      @users.each do |collaborator|
+        @collaboration.push(create(:collaborator, user: collaborator, wiki: @wiki_collaboration))
+      end
+    end
+    it 'returns all users who collaborated on a wiki' do
+      expect(@wiki_collaboration.user_collaborators).to eq(@users)
+    end
   end
 end

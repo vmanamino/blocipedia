@@ -7,6 +7,18 @@ class Wiki < ActiveRecord::Base
   validates :body, length: { minimum: 20 }, presence: true
   validates :user, presence: true
 
+  extend FriendlyId
+  friendly_id :title, use: [:slugged, :history]
+
+  def user_collaborators
+    users = []
+    collaborators = Collaborator.includes(:user).where(wiki_id: self).all
+    collaborators.each do |collaborator|
+      users.push(collaborator.user)
+    end
+    users
+  end
+
   def self.visible_to(user)
     if user
       if user.role == 'admin'
@@ -18,7 +30,4 @@ class Wiki < ActiveRecord::Base
       Wiki.where(private: false)
     end
   end
-
-  extend FriendlyId
-  friendly_id :title, use: [:slugged, :history]
 end
