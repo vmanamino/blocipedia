@@ -20,14 +20,20 @@ class Wiki < ActiveRecord::Base
   end
 
   def self.visible_to(user)
+    wikis = []
     if user
       if user.role == 'admin'
-        Wiki.all
+        wikis = Wiki.all
       else
-        Wiki.where('user_id=? OR private=?', user.id, false)
+        wikis = Wiki.where('user_id=? OR private=?', user.id, false)
+        collaborators = Collaborator.includes(:wiki).where(user_id: user).all
+        collaborators.each do |collaborator|
+          wikis.push(collaborator.wiki)
+        end
       end
     else
-      Wiki.where(private: false)
+      wikis = Wiki.where(private: false)
     end
+    wikis
   end
 end
