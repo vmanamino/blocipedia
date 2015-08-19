@@ -31,7 +31,7 @@ describe Collaborator do
       expect(wikis.count).to eq(3)
     end
   end
-  context 'One Wiki' do
+  context 'a Wiki' do
     before do
       @wiki = create(:wiki)
       @wiki_owner = create(:user)

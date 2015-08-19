@@ -7,7 +7,7 @@ describe Amount do
   it 'produces charge amount' do
     expect(@amount.default).to eq(200)
   end
-  it 'does not set amount attribute without calling default' do
+  it '.default' do
     expect(@amount.amount).to be_nil
   end
   it 'sets amount attribute after calling default' do

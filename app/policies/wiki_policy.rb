@@ -4,11 +4,11 @@ class WikiPolicy < ApplicationPolicy
   end
 
   def show?
-    record.private == false || (user.admin? || record.user == user)
+    record.private == false || ((user.admin? || record.user == user) || record.user_collaborators.include?(user))
   end
 
   def update?
-    user.present? && (record.private == false || (user.admin? || record.user == user))
+    user.present? && (record.private == false || ((user.admin? || record.user == user) || record.user_collaborators.include?(user)))
   end
 
   def destroy?

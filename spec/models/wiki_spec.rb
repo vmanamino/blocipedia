@@ -19,11 +19,11 @@ describe Wiki do
   it { should have_many(:users) }
   it { should validate_presence_of(:user) }
   it { should have_many(:collaborators) }
-  it 'default value of private is false' do
+  it 'private default is false' do
     @wiki = create(:wiki)
     expect(@wiki.private).to be(false)
   end
-  describe 'visible_to scope method' do
+  describe '.visible_to' do
     before do
       @collaborator = create(:user)
       @wikis_private_collaborator = create_list(:wiki, 2, private: true)
@@ -44,36 +44,42 @@ describe Wiki do
         create(:collaborator, user: @collaborator_other, wiki: wiki)
       end
       @wikis_public_no_collaborator = create_list(:wiki, 2)
+      @wikis_private_collaborator_is_owner = create_list(:wiki, 2, user: @collaborator, private: true)
     end
-    it 'sees private wikis collaborated on' do
+    it 'includes private wikis collaborated on' do
       wikis = Wiki.visible_to(@collaborator)
       collaborations = []
       wikis.each do |wiki|
-        if wiki.private == true
+        if wiki.private == true && wiki.user_id != @collaborator.id
           collaborations.push(wiki)
         end
       end
       expect(collaborations).to eq(@wikis_private_collaborator)
     end
-    it 'sees public wikis collaborated on' do
+    it 'includes public wikis collaborated on' do
       wikis = Wiki.visible_to(@collaborator)
       expect(wikis.include?(@wikis_public_collaborator[0])).to be true
       expect(wikis.include?(@wikis_public_collaborator[1])).to be true
     end
-    it 'does not see private wikis of another collaborator' do
+    it 'excludes private wikis of another collaborator' do
       wikis = Wiki.visible_to(@collaborator)
       expect(wikis.include?(@wikis_private_other_collaborator[0])).to be false
       expect(wikis.include?(@wikis_private_other_collaborator[1])).to be false
     end
-    it 'sees public wikis of another collaborator' do
+    it 'includes public wikis of another collaborator' do
       wikis = Wiki.visible_to(@collaborator)
       expect(wikis.include?(@wikis_public_other_collaborator[0])).to be true
       expect(wikis.include?(@wikis_public_other_collaborator[1])).to be true
     end
-    it 'sees public wikis with no collaborator' do
+    it 'includes public wikis with no collaborator' do
       wikis = Wiki.visible_to(@collaborator)
       expect(wikis.include?(@wikis_public_no_collaborator[0])).to be true
       expect(wikis.include?(@wikis_public_no_collaborator[1])).to be true
+    end
+    it 'includes owned private wikis' do
+      wikis = Wiki.visible_to(@collaborator)
+      expect(wikis.include?(@wikis_private_collaborator_is_owner[0])).to be true
+      expect(wikis.include?(@wikis_private_collaborator_is_owner[1])).to be true
     end
   end
   describe 'user_collaborators method' do

@@ -7,7 +7,7 @@ describe ChargesController do
     @user = create(:user)
     sign_in @user
   end
-  describe '#new action' do
+  describe '#new' do
     before { get :new }
     it { should render_template('new') }
   end
