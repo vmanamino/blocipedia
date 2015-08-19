@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
 
   devise_for :users
-  resources :users, only: [:update, :show]
-  resources :wikis do
-    resources :collaborators, only: [:create, :destroy]
+  resources :users, only: [:update, :show] do
+    resources :collaborators, only: [:create]
   end
+  resources :collaborators, only: [:destroy]
+  resources :wikis
   resources :charges, only: [:new, :create]
   get 'about' => 'welcome#about'
 
