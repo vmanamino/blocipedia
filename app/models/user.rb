@@ -33,6 +33,10 @@ class User < ActiveRecord::Base
     collaboration_wikis
   end
 
+  def added_to(wiki)
+    collaborators.where(user_id: self, wiki_id: wiki.id).first
+  end
+
   private
 
   def defaults

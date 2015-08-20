@@ -48,7 +48,7 @@ describe User do
       expect(Wiki.where(user: @user, private: false).count).to eq(0)
       expect(Wiki.count).to eq(5)
     end
-    context 'role standard' do
+    context 'standard user' do
       before do
         @user_standard = create(:user) # default role is standard
         @user_standard_wikis = create_list(:wiki, 5, user: @user_standard, private: true)
@@ -72,7 +72,7 @@ describe User do
         expect(Wiki.where(user: @user_standard, private: true).count).to eq(5)
       end
     end
-    context 'role premium' do
+    context 'premium user' do
       before do
         @user_premium = create(:user, role: 'premium')
         @private_wikis = create_list(:wiki, 5, user: @user_premium, private: true)
@@ -93,6 +93,21 @@ describe User do
         @user_premium.reload
         expect(Wiki.where(user: @user_premium, private: true).count).to eq(0)
       end
+    end
+  end
+  describe '.added_to' do
+    before do
+      @wiki_collaboration = create(:wiki)
+      @wiki_user_not_added = create(:wiki)
+      @user = create(:user)
+      @collaborator_user_added = create(:collaborator, user: @user, wiki: @wiki_collaboration)
+      @collaborator_user_not_added = create(:collaborator, user: create(:user), wiki: @wiki_user_not_added)
+    end
+    it 'returns user as collaborator' do
+      expect(@user.added_to(@wiki_collaboration)).to eq(@collaborator_user_added)
+    end
+    it 'returns nil for user not added' do
+      expect(@user.added_to(@wiki_user_not_added)).to be nil
     end
   end
 end
