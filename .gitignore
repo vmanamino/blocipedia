@@ -19,5 +19,5 @@
 # Ignore application configuration
 /config/application.yml
 
-# ignore coverage html
-/coverage
+# ignore coverage
+/coverage/*
