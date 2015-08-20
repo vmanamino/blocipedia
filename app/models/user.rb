@@ -37,6 +37,10 @@ class User < ActiveRecord::Base
     collaborators.where(user_id: self, wiki_id: wiki.id).first
   end
 
+  def exclude
+    User.where.not(id: self)
+  end
+
   private
 
   def defaults

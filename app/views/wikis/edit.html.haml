@@ -8,5 +8,7 @@
       %li Nothing mean
   .col-md-8
     = render partial: 'wikis/form_edit', locals: { wiki: @wiki }
-
+  - if current_user.role == 'admin' || (current_user.role == 'premium' && @wiki.user_id == current_user.id)
+    .col-md-4
+      = render partial: 'users/user', collection: @users, locals: { wiki: @wiki }
 

@@ -110,4 +110,13 @@ describe User do
       expect(@user.added_to(@wiki_user_not_added)).to be nil
     end
   end
+  describe '.exclude' do
+    before do
+      @current_user = create(:user)
+    end
+    it 'current user from collection of users' do
+      users = @current_user.exclude
+      expect(users.include?(@current_user)).to be false
+    end
+  end
 end
