@@ -1,0 +1,69 @@
+required simplecov
+Run options: include {:locations=>{"./spec/controllers/collaborators_controller.rb"=>[16]}}
+F
+
+Failures:
+
+  1) CollaboratorsController#create collaborator for current user
+     Failure/Error: post :create, collaborator: { user_id: @user, wiki_id: wiki }
+     ActionView::MissingTemplate:
+       Missing template collaborators/create, application/create with {:locale=>[:en], :formats=>[:html], :variants=>[], :handlers=>[:erb, :builder, :raw, :ruby, :coffee, :haml, :jbuilder]}. Searched in:
+         * "#<RSpec::Rails::ViewRendering::EmptyTemplatePathSetDecorator:0x007f5da8eee870>"
+     # /home/action/.gem/ruby/2.1.1/gems/actionview-4.2.1/lib/action_view/path_set.rb:46:in `find'
+     # /home/action/.gem/ruby/2.1.1/gems/actionview-4.2.1/lib/action_view/lookup_context.rb:121:in `find'
+     # /home/action/.gem/ruby/2.1.1/gems/actionview-4.2.1/lib/action_view/renderer/abstract_renderer.rb:18:in `find_template'
+     # /home/action/.gem/ruby/2.1.1/gems/actionview-4.2.1/lib/action_view/renderer/template_renderer.rb:40:in `determine_template'
+     # /home/action/.gem/ruby/2.1.1/gems/actionview-4.2.1/lib/action_view/renderer/template_renderer.rb:8:in `render'
+     # /home/action/.gem/ruby/2.1.1/gems/actionview-4.2.1/lib/action_view/renderer/renderer.rb:42:in `render_template'
+     # /home/action/.gem/ruby/2.1.1/gems/actionview-4.2.1/lib/action_view/renderer/renderer.rb:23:in `render'
+     # /home/action/.gem/ruby/2.1.1/gems/actionview-4.2.1/lib/action_view/rendering.rb:100:in `_render_template'
+     # /home/action/.gem/ruby/2.1.1/gems/actionpack-4.2.1/lib/action_controller/metal/streaming.rb:217:in `_render_template'
+     # /home/action/.gem/ruby/2.1.1/gems/actionview-4.2.1/lib/action_view/rendering.rb:83:in `render_to_body'
+     # /home/action/.gem/ruby/2.1.1/gems/actionpack-4.2.1/lib/action_controller/metal/rendering.rb:32:in `render_to_body'
+     # /home/action/.gem/ruby/2.1.1/gems/actionpack-4.2.1/lib/action_controller/metal/renderers.rb:37:in `render_to_body'
+     # /home/action/.gem/ruby/2.1.1/gems/actionpack-4.2.1/lib/abstract_controller/rendering.rb:25:in `render'
+     # /home/action/.gem/ruby/2.1.1/gems/actionpack-4.2.1/lib/action_controller/metal/rendering.rb:16:in `render'
+     # /home/action/.gem/ruby/2.1.1/gems/actionpack-4.2.1/lib/action_controller/metal/instrumentation.rb:44:in `block (2 levels) in render'
+     # /home/action/.gem/ruby/2.1.1/gems/activesupport-4.2.1/lib/active_support/core_ext/benchmark.rb:12:in `block in ms'
+     # /home/action/.gem/ruby/2.1.1/gems/activesupport-4.2.1/lib/active_support/core_ext/benchmark.rb:12:in `ms'
+     # /home/action/.gem/ruby/2.1.1/gems/actionpack-4.2.1/lib/action_controller/metal/instrumentation.rb:44:in `block in render'
+     # /home/action/.gem/ruby/2.1.1/gems/actionpack-4.2.1/lib/action_controller/metal/instrumentation.rb:87:in `cleanup_view_runtime'
+     # /home/action/.gem/ruby/2.1.1/gems/activerecord-4.2.1/lib/active_record/railties/controller_runtime.rb:25:in `cleanup_view_runtime'
+     # /home/action/.gem/ruby/2.1.1/gems/actionpack-4.2.1/lib/action_controller/metal/instrumentation.rb:43:in `render'
+     # /home/action/.gem/ruby/2.1.1/gems/actionpack-4.2.1/lib/action_controller/metal/implicit_render.rb:10:in `default_render'
+     # /home/action/.gem/ruby/2.1.1/gems/actionpack-4.2.1/lib/action_controller/metal/implicit_render.rb:5:in `send_action'
+     # /home/action/.gem/ruby/2.1.1/gems/actionpack-4.2.1/lib/abstract_controller/base.rb:198:in `process_action'
+     # /home/action/.gem/ruby/2.1.1/gems/actionpack-4.2.1/lib/action_controller/metal/rendering.rb:10:in `process_action'
+     # /home/action/.gem/ruby/2.1.1/gems/actionpack-4.2.1/lib/abstract_controller/callbacks.rb:20:in `block in process_action'
+     # /home/action/.gem/ruby/2.1.1/gems/activesupport-4.2.1/lib/active_support/callbacks.rb:117:in `call'
+     # /home/action/.gem/ruby/2.1.1/gems/activesupport-4.2.1/lib/active_support/callbacks.rb:117:in `call'
+     # /home/action/.gem/ruby/2.1.1/gems/activesupport-4.2.1/lib/active_support/callbacks.rb:555:in `block (2 levels) in compile'
+     # /home/action/.gem/ruby/2.1.1/gems/activesupport-4.2.1/lib/active_support/callbacks.rb:505:in `call'
+     # /home/action/.gem/ruby/2.1.1/gems/activesupport-4.2.1/lib/active_support/callbacks.rb:505:in `call'
+     # /home/action/.gem/ruby/2.1.1/gems/activesupport-4.2.1/lib/active_support/callbacks.rb:92:in `_run_callbacks'
+     # /home/action/.gem/ruby/2.1.1/gems/activesupport-4.2.1/lib/active_support/callbacks.rb:776:in `_run_process_action_callbacks'
+     # /home/action/.gem/ruby/2.1.1/gems/activesupport-4.2.1/lib/active_support/callbacks.rb:81:in `run_callbacks'
+     # /home/action/.gem/ruby/2.1.1/gems/actionpack-4.2.1/lib/abstract_controller/callbacks.rb:19:in `process_action'
+     # /home/action/.gem/ruby/2.1.1/gems/actionpack-4.2.1/lib/action_controller/metal/rescue.rb:29:in `process_action'
+     # /home/action/.gem/ruby/2.1.1/gems/actionpack-4.2.1/lib/action_controller/metal/instrumentation.rb:32:in `block in process_action'
+     # /home/action/.gem/ruby/2.1.1/gems/activesupport-4.2.1/lib/active_support/notifications.rb:164:in `block in instrument'
+     # /home/action/.gem/ruby/2.1.1/gems/activesupport-4.2.1/lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+     # /home/action/.gem/ruby/2.1.1/gems/activesupport-4.2.1/lib/active_support/notifications.rb:164:in `instrument'
+     # /home/action/.gem/ruby/2.1.1/gems/actionpack-4.2.1/lib/action_controller/metal/instrumentation.rb:30:in `process_action'
+     # /home/action/.gem/ruby/2.1.1/gems/actionpack-4.2.1/lib/action_controller/metal/params_wrapper.rb:250:in `process_action'
+     # /home/action/.gem/ruby/2.1.1/gems/activerecord-4.2.1/lib/active_record/railties/controller_runtime.rb:18:in `process_action'
+     # /home/action/.gem/ruby/2.1.1/gems/actionpack-4.2.1/lib/abstract_controller/base.rb:137:in `process'
+     # /home/action/.gem/ruby/2.1.1/gems/actionview-4.2.1/lib/action_view/rendering.rb:30:in `process'
+     # /home/action/.gem/ruby/2.1.1/gems/actionpack-4.2.1/lib/action_controller/test_case.rb:632:in `process'
+     # /home/action/.gem/ruby/2.1.1/gems/actionpack-4.2.1/lib/action_controller/test_case.rb:65:in `process'
+     # /home/action/.gem/ruby/2.1.1/gems/actionpack-4.2.1/lib/action_controller/test_case.rb:514:in `post'
+     # ./spec/controllers/collaborators_controller.rb:18:in `block (3 levels) in <top (required)>'
+
+Finished in 0.46354 seconds (files took 2.61 seconds to load)
+1 example, 1 failure
+
+Failed examples:
+
+rspec ./spec/controllers/collaborators_controller.rb:16 # CollaboratorsController#create collaborator for current user
+
+Coverage report generated for RSpec to /home/action/code/blocipedia/coverage. 49 / 79 LOC (62.03%) covered.
