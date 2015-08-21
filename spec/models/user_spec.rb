@@ -118,5 +118,12 @@ describe User do
       users = @current_user.exclude
       expect(users.include?(@current_user)).to be false
     end
+    before do
+      @admin = create(:user, role: 'admin')
+    end
+    it 'admin from collection of users' do
+      users = @current_user.exclude
+      expect(users.include?(@admin)).to be false
+    end
   end
 end

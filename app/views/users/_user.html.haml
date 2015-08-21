@@ -2,3 +2,4 @@
   .media-body
     %h4
       = user.name
+      = render partial: 'collaborators/collaborator', locals: { user: user, wiki: wiki }

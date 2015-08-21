@@ -38,7 +38,7 @@ class User < ActiveRecord::Base
   end
 
   def exclude
-    User.where.not(id: self)
+    User.where.not('id=? OR role=?', self, 'admin')
   end
 
   private

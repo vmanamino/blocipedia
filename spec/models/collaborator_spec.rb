@@ -45,4 +45,14 @@ describe Collaborator do
       expect(Collaborator.where(wiki: @wiki).count).to eq(5)
     end
   end
+  describe '.name' do
+    before do
+      @user = create(:user)
+      @wiki = create(:wiki)
+      @collaborator = create(:collaborator, user: @user, wiki: @wiki)
+    end
+    it 'name of collaborator from user' do
+      expect(@collaborator.name).to eq(@user.name)
+    end
+  end
 end
