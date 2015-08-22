@@ -4,8 +4,12 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
+
   has_many :wikis
+  has_many :collaborators
+
   validates :role, presence: true
+
   after_initialize :defaults, if: :new_record?
   after_update :downgrade_status
 
@@ -19,6 +23,23 @@ class User < ActiveRecord::Base
 
   def premium?
     role == 'premium'
+  end
+
+  def wikis_collaborator
+    collaboration_wikis = []
+    collaborators = Collaborator.includes(:wiki).where(user_id: self).all
+    collaborators.each do |collaborator|
+      collaboration_wikis.push(collaborator.wiki)
+    end
+    collaboration_wikis
+  end
+
+  def added_to(wiki)
+    collaborators.where(user_id: self, wiki_id: wiki.id).first # rubocop:disable Rails/FindBy
+  end
+
+  def exclude
+    User.where.not('id=? OR role=?', self, 'admin')
   end
 
   private

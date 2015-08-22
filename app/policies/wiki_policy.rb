@@ -4,11 +4,11 @@ class WikiPolicy < ApplicationPolicy
   end
 
   def show?
-    record.private == false || (user.admin? || record.user == user)
+    record.private == false || ((user.admin? || record.user == user) || record.user_collaborators.include?(user))
   end
 
-  def update?
-    user.present? && (record.private == false || (user.admin? || record.user == user))
+  def update? # rubocop:disable Metrics/AbcSize
+    user.present? && (record.private == false || ((user.admin? || record.user == user) || record.user_collaborators.include?(user))) # rubocop:disable Metrics/LineLength
   end
 
   def destroy?

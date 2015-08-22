@@ -1,0 +1,10 @@
+- if policy(Collaborator.new).create?
+  %div
+  - if collaborator = user.added_to(wiki)
+    = link_to wiki_collaborator_path(wiki, collaborator), class: 'btn btn-danger btn-sm', method: :delete do
+      %i.glyphicon.glyphicon-remove>
+      \ Remove
+  - else
+    = link_to wiki_collaborators_path(wiki.id, Collaborator.new, collaborator: { user_id: user.id, wiki_id: wiki.id }), method: :post, class: 'btn btn-default btn-sm' do
+      %i.glyphicon.glyphicon-user>
+      \ Add

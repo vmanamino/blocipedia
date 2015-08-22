@@ -6,7 +6,7 @@ describe UsersController do
     @current_user = create(:user, role: 'premium')
     sign_in @current_user
   end
-  describe 'show action' do
+  describe '#show' do
     before do
       @wiki_collection = create_list(:wiki, 5, user: @current_user)
       @private_wikis = create_list(:wiki, 5, user: @current_user, private: true)
@@ -27,7 +27,7 @@ describe UsersController do
       expect(wikis.where(private: false).count).to eq(5)
     end
   end
-  describe 'update action' do
+  describe '#update' do
     it 'downgrades premium user to standard' do
       patch :update, id: @current_user.id, user: { role: 'standard' }
       @current_user.reload
@@ -62,7 +62,7 @@ describe UsersController do
       wikis = Wiki.where(user: @change_user)
       expect(wikis.where(private: false).count).to eq(0)
     end
-    it 'makes all associated wikis public only if user is updated to standard ' do
+    it 'makes all associated wikis public if user is updated to standard ' do
       wikis = Wiki.where(user: @change_user)
       expect(wikis.where(private: true).count).to eq(5)
       patch :update, id: @change_user.id, user: { role: 'standard' }

@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'pundit/rspec'
 require 'application_policy'
 
 include Devise::TestHelpers
@@ -22,6 +23,9 @@ describe WikiPolicy do
       @premium_user_other = create(:user, role: 'premium')
       @standard_user_other = create(:user)
       @admin_user = create(:user, role: 'admin')
+      @collaborator = create(:user)
+      create(:collaborator, user: @collaborator, wiki: @private_wiki)
+      create(:collaborator, user: @collaborator, wiki: wiki)
       @visitor = double
     end
     it 'permits view of private wiki to premium user owner' do
@@ -48,6 +52,12 @@ describe WikiPolicy do
     it 'permits view of public wiki to a site visitor' do
       expect(subject).to permit(@visitor, wiki)
     end
+    it 'permits view of private wiki to collaborator' do
+      expect(subject).to permit(@collaborator, @private_wiki)
+    end
+    it 'permits view of public wiki to collaborator' do
+      expect(subject).to permit(@collaborator, wiki)
+    end
   end
   permissions :create? do
     it_behaves_like 'application_policy_create'
@@ -62,14 +72,19 @@ describe WikiPolicy do
       @premium_user_other = create(:user, role: 'premium')
       @standard_user_other = create(:user)
       @admin_user = create(:user, role: 'admin')
+      @collaborator = create(:user)
+      @collaboration = create(:collaborator, user: @collaborator, wiki: @private_wiki)
     end
-    it 'permits user owner to update wiki' do
+    it 'permits user owner' do
       expect(subject).to permit(@premium_user_owner, @private_wiki)
       expect(subject).to permit(user, wiki)
     end
-    it 'denies updating wiki to another user' do
+    it 'denies another user' do
       expect(subject).not_to permit(@standard_other_user, wiki)
       expect(subject).not_to permit(@premium_user_other, @private_wiki)
+    end
+    it 'permits collaborator' do
+      expect(subject).to permit(@collaborator, @private_wiki)
     end
   end
   permissions :edit? do
@@ -84,6 +99,14 @@ describe WikiPolicy do
     end
     it 'does not allow other user to destroy wiki' do
       expect(subject).not_to permit(create(:user), wiki)
+    end
+    before do
+      @collaborator = create(:user, role: 'premium')
+      @wiki = create(:wiki)
+      @collaboration = create(:collaborator, user: @collaborator, wiki: @wiki)
+    end
+    it 'denies collaborator to destroy' do
+      expect(subject).not_to permit(@collaborator, @wiki)
     end
   end
 end
