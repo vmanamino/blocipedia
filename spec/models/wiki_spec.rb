@@ -81,6 +81,9 @@ describe Wiki do
       expect(wikis.include?(@wikis_private_collaborator_is_owner[0])).to be true
       expect(wikis.include?(@wikis_private_collaborator_is_owner[1])).to be true
     end
+    xit 'does not include public wikis collaborated on more than once' do
+
+    end
   end
   describe 'user_collaborators method' do
     before do

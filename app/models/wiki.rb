@@ -34,6 +34,6 @@ class Wiki < ActiveRecord::Base
     else
       wikis = Wiki.where(private: false)
     end
-    wikis
+    wikis.uniq
   end
 end
