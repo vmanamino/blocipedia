@@ -51,7 +51,7 @@ describe CollaboratorPolicy do
     it 'permitted to premium user owner' do
       expect(subject).to permit(@user_premium, create(:collaborator, user: collaborator, wiki: @wiki))
     end
-    it 'denied to premium user not owner' do # want to change/deny this
+    it 'denied to premium user not owner' do
       expect(subject).not_to permit(@user_premium_other, create(:collaborator, user: collaborator, wiki: @wiki))
     end
   end
