@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 include Devise::TestHelpers
+include Warden::Test::Helpers
+# Warden.test_mode!
 
 describe CollaboratorsController do
   before do
@@ -14,36 +16,32 @@ describe CollaboratorsController do
     end
     it 'collaborator by current user' do
       post :create, wiki_id: @wiki.id, collaborator: { user_id: @user.id, wiki_id: @wiki.id }
-      expect(flash[:notice]).to eq('Successfully made this user a collaborator!')
+      @collaborator = assigns(:collaborator)
+      expect(flash[:notice]).to eq('This user is a collaborator!')
     end
-    it 'collaborator belongs to user' do
-      post :create, wiki_id: @wiki.id, collaborator: { user_id: @user.id, wiki_id: @wiki.id }
-      collaborators = Collaborator.where(user_id: @user.id).all
-      expect(collaborators.all? { |c| c.user_id == @user.id }).to be true
-    end
-    it 'collaborator belongs to wiki' do
-      post :create, wiki_id: @wiki.id, collaborator: { user_id: @user.id, wiki_id: @wiki.id }
-      collaborators = Collaborator.where(wiki_id: @wiki.id).all
-      expect(collaborators.all? { |c| c.user_id == @user.id }).to be true
+    context 'creator signed out' do
+      before do
+        logout
+      end
+      it 'collaborator creation fails' do
+        post :create, wiki_id: @wiki.id, collaborator: { user_id: @user.id, wiki_id: @wiki.id }
+        expect(response).not_to be_successful
+      end
     end
     before { post :create, wiki_id: @wiki.id, collaborator: { user_id: @user.id, wiki_id: @wiki.id } }
     it { should redirect_to(edit_wiki_path(@wiki)) }
     it 'collaborator fails, flash error generated' do
-      post :create, wiki_id: @wiki.id, collaborator: { user_id: nil, wiki_id: @wiki.id }
-      expect(flash[:error]).to eq('Please try again to make this user a collaborator!')
-    end
-    it 'collaborator fails, then it redirects to wiki' do
       post :create, wiki_id: @wiki.id, collaborator: { user_id: @user.id, wiki_id: nil }
-      expect(response).to redirect_to(edit_wiki_path(@wiki))
+      expect(flash[:error]).to eq('Please try again to make this user a collaborator!')
     end
   end
   describe '#destroy' do
     before do
       @user = create(:user)
-      @wiki = create(:wiki)
+      @wiki = create(:wiki, user: @user_premium)
       @collaborator = create(:collaborator, user: @user, wiki: @wiki)
     end
-    it 'collaborator by current user' do
+    it 'collaborator by current user wiki owner' do
       delete :destroy, wiki_id: @wiki.id, id: @collaborator.id
       expect(flash[:notice]).to eq('This user is no longer a collaborator!')
       expect(response).to redirect_to(edit_wiki_path(@wiki))

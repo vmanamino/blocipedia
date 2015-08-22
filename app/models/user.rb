@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   has_many :collaborators
 
   validates :role, presence: true
+
   after_initialize :defaults, if: :new_record?
   after_update :downgrade_status
 
@@ -34,7 +35,7 @@ class User < ActiveRecord::Base
   end
 
   def added_to(wiki)
-    collaborators.where(user_id: self, wiki_id: wiki.id).first
+    collaborators.where(user_id: self, wiki_id: wiki.id).first # rubocop:disable Rails/FindBy
   end
 
   def exclude

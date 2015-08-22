@@ -19,7 +19,7 @@ class Wiki < ActiveRecord::Base
     users
   end
 
-  def self.visible_to(user)
+  def self.visible_to(user) # rubocop:disable Metrics/MethodLength
     wikis = []
     if user
       if user.role == 'admin'

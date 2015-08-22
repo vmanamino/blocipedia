@@ -6,7 +6,11 @@ class Collaborator < ActiveRecord::Base
   validates :wiki, presence: true
 
   def name
-    user = User.where(id: self.user_id).first
+    user = User.where(id: user_id).first # rubocop:disable Rails/FindBy
     user.name
+  end
+
+  def wiki
+    Wiki.where(id: wiki_id).first # rubocop:disable Rails/FindBy
   end
 end

@@ -108,6 +108,5 @@ describe WikiPolicy do
     it 'denies collaborator to destroy' do
       expect(subject).not_to permit(@collaborator, @wiki)
     end
-    
   end
 end

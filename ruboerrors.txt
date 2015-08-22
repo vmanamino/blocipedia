@@ -1,0 +1,80 @@
+Inspecting 42 files
+........C.CC.......CCW............WW.C....
+
+Offenses:
+
+app/controllers/collaborators_controller.rb:2:1: C: Use 2 (not 0) spaces for indentation.
+before_action :authenticate_user!
+
+app/controllers/collaborators_controller.rb:4:3: C: Assignment Branch Condition size for create is too high. [18.14/15]
+  def create
+  ^^^
+app/controllers/collaborators_controller.rb:4:3: C: Inconsistent indentation detected.
+  def create
+  ^^^^^^^^^^
+app/controllers/collaborators_controller.rb:18:3: C: Assignment Branch Condition size for destroy is too high. [17.15/15]
+  def destroy
+  ^^^
+app/controllers/collaborators_controller.rb:18:3: C: Inconsistent indentation detected.
+  def destroy
+  ^^^^^^^^^^^
+app/policies/collaborator_policy.rb:2:1: C: Extra empty line detected at class body beginning.
+app/policies/wiki_policy.rb:10:3: C: Assignment Branch Condition size for update? is too high. [15.52/15]
+  def update?
+  ^^^
+app/policies/wiki_policy.rb:11:121: C: Line is too long. [132/120]
+    user.present? && (record.private == false || ((user.admin? || record.user == user) || record.user_collaborators.include?(user)))
+                                                                                                                        ^^^^^^^^^^^^
+app/models/wiki.rb:22:3: C: Method has too many lines. [15/10]
+  def self.visible_to(user)
+  ^^^
+app/models/user.rb:12:1: C: Trailing whitespace detected.
+app/models/user.rb:38:19: C: Use find_by instead of where.first.
+    collaborators.where(user_id: self, wiki_id: wiki.id).first
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app/models/collaborator.rb:9:17: C: Use find_by instead of where.first.
+    user = User.where(id: self.user_id).first
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app/models/collaborator.rb:9:27: C: Redundant self detected.
+    user = User.where(id: self.user_id).first
+                          ^^^^^^^^^^^^
+app/models/collaborator.rb:14:5: W: Useless assignment to variable - wiki.
+    wiki = Wiki.where(id: self.wiki_id).first
+    ^^^^
+app/models/collaborator.rb:14:17: C: Use find_by instead of where.first.
+    wiki = Wiki.where(id: self.wiki_id).first
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app/models/collaborator.rb:14:27: C: Redundant self detected.
+    wiki = Wiki.where(id: self.wiki_id).first
+                          ^^^^^^^^^^^^
+app/models/collaborator.rb:16:1: C: Extra empty line detected at class body end.
+spec/controllers/collaborators_controller.rb:24:15: C: Do not use parentheses for method calls with no arguments.
+        logout()
+              ^
+spec/controllers/collaborators_controller.rb:46:7: W: Useless assignment to variable - name.
+      name = assigns(:name)
+      ^^^^
+spec/controllers/collaborators_controller.rb:52:4: C: Final newline missing.
+end
+   
+spec/policies/collaborator_policy.rb:51:6: C: Inconsistent indentation detected.
+     it 'permitted to premium user owner' do
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/policies/collaborator_policy.rb:53:5: W: end at 53, 4 is not aligned with it 'permitted to premium user owner' do at 51, 5
+    end
+    ^^^
+spec/policies/collaborator_policy.rb:58:4: C: Final newline missing.
+end
+   
+spec/spec_helper.rb:45:1: C: Incorrect indentation detected (column 0 instead of 2).
+# with RSpec, but feel free to customize to your heart's content.
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/spec_helper.rb:69:3: C: Incorrect indentation detected (column 2 instead of 4).
+  # if config.files_to_run.one? *
+  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/spec_helper.rb:73:5: C: Incorrect indentation detected (column 4 instead of 2).
+    # config.default_formatter = 'doc' *
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/spec_helper.rb:92:1: C: Extra empty line detected at block body end.
+
+42 files inspected, 27 offenses detected

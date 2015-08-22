@@ -12,10 +12,10 @@ describe Collaborator do
   it { should belong_to(:user) }
   it { should belong_to(:wiki) }
   it 'references user' do
-    expect(@collaborator.user).to be(@user)
+    expect(@collaborator.user_id).to eq(@user.id)
   end
   it 'references wiki' do
-    expect(@collaborator.wiki).to be(@wiki)
+    expect(@collaborator.wiki_id).to eq(@wiki.id)
   end
   context 'User as Collaborator' do
     before do
