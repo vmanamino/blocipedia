@@ -83,11 +83,12 @@ describe Wiki do
     end
     it 'does not duplicate any public wiki collaborated on' do
       wikis = Wiki.visible_to(@collaborator)
+      # got activerecord errors using count method on wikis
       ids = []
       wikis.each do |w|
         ids.push(w.id)
       end
-      expect(ids.any?{ |id| ids.count(id) == 1 }).to be true # got activerecord errors when using count on wikis collection
+      expect(ids.any? { |id| ids.count(id) == 1 }).to be true
     end
   end
   describe 'user_collaborators method' do

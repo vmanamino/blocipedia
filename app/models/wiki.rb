@@ -19,7 +19,7 @@ class Wiki < ActiveRecord::Base
     users
   end
 
-  def self.visible_to(user) # rubocop:disable Metrics/MethodLength
+  def self.visible_to(user) # rubocop:disable Metrics/AbcSize
     wikis = []
     if user
       if user.role == 'admin'
@@ -28,7 +28,7 @@ class Wiki < ActiveRecord::Base
         wikis = Wiki.where('user_id=? OR private=?', user.id, false)
         collaborators = Collaborator.includes(:wiki).where(user_id: user).all
         collaborators.each do |collaborator|
-          unless wikis.include?(collaborator.wiki)
+          unless wikis.include?(collaborator.wiki) # rubocop:disable Style/IfUnlessModifier
             wikis.push(collaborator.wiki)
           end
         end
