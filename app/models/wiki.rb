@@ -28,12 +28,15 @@ class Wiki < ActiveRecord::Base
         wikis = Wiki.where('user_id=? OR private=?', user.id, false)
         collaborators = Collaborator.includes(:wiki).where(user_id: user).all
         collaborators.each do |collaborator|
-          wikis.push(collaborator.wiki)
+          unless wikis.include?(collaborator.wiki)
+            wikis.push(collaborator.wiki)
+          end
         end
       end
     else
       wikis = Wiki.where(private: false)
     end
-    wikis.uniq
+    wikis
+    # wikis.uniq # uniq method removes private wiki when user is standard
   end
 end

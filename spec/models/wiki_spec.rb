@@ -81,8 +81,13 @@ describe Wiki do
       expect(wikis.include?(@wikis_private_collaborator_is_owner[0])).to be true
       expect(wikis.include?(@wikis_private_collaborator_is_owner[1])).to be true
     end
-    xit 'does not include public wikis collaborated on more than once' do
-
+    it 'does not duplicate any public wiki collaborated on' do
+      wikis = Wiki.visible_to(@collaborator)
+      ids = []
+      wikis.each do |w|
+        ids.push(w.id)
+      end
+      expect(ids.any?{ |id| ids.count(id) == 1 }).to be true # got activerecord errors when using count on wikis collection
     end
   end
   describe 'user_collaborators method' do
